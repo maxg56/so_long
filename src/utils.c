@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maxence <maxence@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 02:37:42 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/10 10:45:08 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:45:47 by maxence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_player	*init_player(int x, int y, void *sprite)
 	player = malloc(sizeof(t_player));
 	if (!player)
 		return (NULL);
+	player->pos = malloc(sizeof(t_vex));
 	player->pos->x = x;
 	player->pos->y = y;
 	player->moves = 0;

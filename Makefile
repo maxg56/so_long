@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+         #
+#    By: maxence <maxence@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 15:53:44 by mgendrot          #+#    #+#              #
-#    Updated: 2024/12/10 09:54:25 by mgendrot         ###   ########.fr        #
+#    Updated: 2024/12/10 17:33:44 by maxence          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,16 +24,17 @@ RM          = rm -f
 MKDIR       = mkdir
 
 LIBFT_DIR       = $(TMP)libft/
-
+LIBFT_CFLAGS     = -L . -l ft
 LIBFT           = libft.a
 LIBFT_INC_H       =  include/libft.h
 LIBFT_GIT	   	=  https://github.com/maxg56/libft.git
-LIBFT_CFLAGS     = -L . -l ft
+
 MINILIBX_DIR    = $(TMP)minilibx-linux/
 MINILIBX_CFLAGS = -L . -l mlx -l Xext -l X11 -lm
 MINILIBX         = libmlx.a
 MINILIBX_INC_H    = mlx.h
 MINILIBX_GIT    = https://github.com/42Paris/minilibx-linux.git
+
 # **************************************************************************** #
 #                                   Colors                                     #
 # **************************************************************************** #

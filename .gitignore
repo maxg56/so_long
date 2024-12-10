@@ -1,0 +1,8 @@
+/obj
+.vscode 
+.compiled_count
+*.d
+*.o
+*.out
+*.exe
+so_long
