@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maxence <maxence@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 01:36:30 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/11 03:44:58 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/11 06:28:32 by maxence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #define WIDTH 512
 #define HEIGHT 512
 
-static mlx_image_t* image;
+//static mlx_image_t* image;
 
 # define KEY_ESC 53
 # define KEY_W 13
@@ -106,14 +106,14 @@ t_game		*init_game(void);
 t_map_info	*init_val(void);
 
 t_bool		parse_input(int ac, char **av, t_game *game);
-t_bool		validate_map_playable(t_game *game);
+t_bool		dfs(t_game *game);
 t_bool		validate_map_structure(t_game *game);
 
 //utils_stack
 
 t_stack		*ft_stacknew(int x, int y);
 void		ft_stackadd(t_stack **stak, t_stack *new);
-t_point		*ft_stackpop(t_stack **stack);
+t_point		*ft_stackpop(t_stack *stack);
 
 char		**mapcpy(char **map, int height);
 int			open_map(char *path);

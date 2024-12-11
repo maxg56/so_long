@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maxence <maxence@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 01:48:58 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/11 02:08:19 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/11 05:59:08 by maxence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,65 +67,53 @@ void ft_hook(void* param)
 
 // -----------------------------------------------------------------------------
 
-int32_t main(int argc, char** argv)
-{
-	t_game	*game;
-	t_bool	check;
-
-	game = init_game();
-	if (!game)
-		return (error("Malloc failed", NULL), EXIT_FAILURE);
-	game->maps = init_map();
-	check = parse_input(argc, argv, game);
-
-	game->window = init_window("so_long",
-				game->maps->width * 32,
-				game->maps->height * 32
-				);
-	if (!game->window || !game->window->mlx)
-		return (error("Malloc failed", game), EXIT_FAILURE);
-		
-	if (!(image = mlx_new_image(game->window->mlx, 34, 34)))
-	{
-		mlx_close_window(game->window->mlx);
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	if (mlx_image_to_window(game->window->mlx, image, 0, 0) == -1)
-	{
-		mlx_close_window(game->window->mlx);
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	mlx_loop_hook(game->window->mlx, ft_randomize, game->window->mlx);
-	mlx_loop_hook(game->window->mlx, ft_hook, game->window->mlx);
-
-	mlx_loop(game->window->mlx);
-	mlx_terminate(game->window->mlx);
-	return (EXIT_SUCCESS);
-}
 /*
-int main(int argc, char **argv)
+int32_t main(void)
 {
-	t_game	*game;
-	t_bool	check;
+	mlx_t* mlx;
 
-	game = init_game();
-	if (!game)
-		return (error("Malloc failed", NULL), EXIT_FAILURE);
-	game->maps = init_map();
-	check = parse_input(argc, argv, game);
+	// Gotta error check this stuff
+	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
+	{
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+	if (!(image = mlx_new_image(mlx, 128, 128)))
+	{
+		mlx_close_window(mlx);
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+	if (mlx_image_to_window(mlx, image, 0, 0) == -1)
+	{
+		mlx_close_window(mlx);
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+	
+	mlx_loop_hook(mlx, ft_randomize, mlx);
+	mlx_loop_hook(mlx, ft_hook, mlx);
 
-	game->window = init_window("so_long",
-				game->maps->width * 32,
-				game->maps->height * 32);
-	if (!game->window)
-		return (error("Malloc failed", game), EXIT_FAILURE);
-
-
-	mlx_hook(game->window->win, 2, 0, key_hook, game);
-	mlx_loop(game->window->mlx);
-	free_game(game);
+	mlx_loop(mlx);
+	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
 }
 */
+int main(int argc, char **argv)
+{
+	t_game	*game;
+
+	game = init_game();
+	if (!game)
+		return (error("Malloc failed", NULL), EXIT_FAILURE);
+	game->maps = init_map();
+	parse_input(argc, argv, game);
+
+	//game->window = init_window("so_long",
+	//			game->maps->width * 32,
+	//			game->maps->height * 32);
+	if (!game->window)
+		return (error("Malloc failed", game), EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
