@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 01:36:30 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/11 03:41:46 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/11 03:44:58 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ t_bool		validate_map_structure(t_game *game);
 
 t_stack		*ft_stacknew(int x, int y);
 void		ft_stackadd(t_stack **stak, t_stack *new);
-t_point		*ft_stackget_back(t_stack **stack);
+t_point		*ft_stackpop(t_stack **stack);
 
 char		**mapcpy(char **map, int height);
 int			open_map(char *path);

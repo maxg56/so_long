@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 07:25:45 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/11 00:03:14 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/11 03:45:43 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	free_map(t_map *map)
 
 void	free_window(t_window *window)
 {
-	if (window->win)
+	if (window->mlx)
 			free(window->mlx);
 	free(window);
 }
