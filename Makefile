@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maxence <maxence@student.42.fr>            +#+  +:+       +#+         #
+#    By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 15:53:44 by mgendrot          #+#    #+#              #
-#    Updated: 2024/12/10 17:33:44 by maxence          ###   ########.fr        #
+#    Updated: 2024/12/11 01:33:20 by mgendrot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ INCLUDE     = include
 
 TMP 	   = .tmp/
 CC          = cc 
-CFLAGS      = -Wall -Wextra -Werror 
+CFLAGS      = -Wall -Wextra -Werror -g
 
 RM          = rm -f
 MKDIR       = mkdir
@@ -30,10 +30,11 @@ LIBFT_INC_H       =  include/libft.h
 LIBFT_GIT	   	=  https://github.com/maxg56/libft.git
 
 MINILIBX_DIR    = $(TMP)minilibx-linux/
-MINILIBX_CFLAGS = -L . -l mlx -l Xext -l X11 -lm
-MINILIBX         = libmlx.a
-MINILIBX_INC_H    = mlx.h
-MINILIBX_GIT    = https://github.com/42Paris/minilibx-linux.git
+MINILIBX_CFLAGS =  libmlx42.a -ldl -lglfw -pthread -lm
+MINILIBX         = libmlx42.a
+MINILIBX_INC_H    = include/MLX42/*.h
+MINILIBX_INC_H_F  = include/MLX42.h include/MLX42_lnt.h
+MINILIBX_GIT    = https://github.com/codam-coding-college/MLX42.git
 
 # **************************************************************************** #
 #                                   Colors                                     #
@@ -57,12 +58,21 @@ TERM_CLEAR_LINE     =   \033[2K\r
 #                                   Sources                                    #
 # **************************************************************************** #
 
-SRC_FILES       =   main windo utils parsin check_map free utils_stack
-
 SRC_DIR         = src/
+MAP_DIR         =  $(SRC_DIR)map/
+UTILS_DIR       =  $(SRC_DIR)utils/
+PRSIG_DIR       =  $(SRC_DIR)parsing/
+SRC_FILES       =   main windo 
+SRC_MAP		 =   check_map check_map_validate
+SRC_UTILS	 =   utils   free utils_stack Erore
+SRC_PRSIG	 =   parsing parsing_pas
 
 
-SRC			    = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
+
+SRC			    = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES))) \
+				  $(addprefix $(MAP_DIR), $(addsuffix .c, $(SRC_MAP))) \
+				  $(addprefix $(UTILS_DIR), $(addsuffix .c, $(SRC_UTILS))) \
+				  $(addprefix $(PRSIG_DIR), $(addsuffix .c, $(SRC_PRSIG)))
 
 OBJ_DIR         = $(TMP)obj/
 OBJ             = $(patsubst %.c, $(OBJ_DIR)%.o, $(SRC))
@@ -103,12 +113,11 @@ all: lib $(NAME)
 
 cleanlibs:
 	@$(MAKE) clean -C $(LIBFT_DIR)	-s
-	@$(MAKE) clean -C $(MINILIBX_DIR) -s
 	
 fcleanlibs:
 	@$(MAKE) fclean -C $(LIBFT_DIR) -s
 	@$(RM) $(MINILIBX)
-	@$(RM) $(MINILIBX_INC_H)
+	@$(RM) $(MINILIBX_INC_H_F)
 	@$(RM) -fr $(MINILIBX_DIR)
 	@$(RM) $(LIBFT)
 	@$(RM) $(LIBFT_INC_H)
@@ -129,16 +138,18 @@ $(LIBFT):
 
 $(MINILIBX):
 	@if [ ! -d "$(MINILIBX_DIR)/.git" ]; then \
-		printf "$(TERM_YELLOW)Cloning third party library \"%s\" in \"%s\"...\n$(DEF_COLOR)" $(MINILIBX_GIT) $(MINILIBX);\
-		git clone $(MINILIBX_GIT) $(MINILIBX_DIR) ;\
+		printf "$(TERM_YELLOW)Cloning third party library \"%s\" in \"%s\"...\n$(DEF_COLOR)" $(MINILIBX_GIT) $(MINILIBX); \
+		git clone $(MINILIBX_GIT) $(MINILIBX_DIR); \
 	fi
 	@printf "$(MAGENTA)Making archive $(TERM_BLUE)\"%s\"$(MAGENTA)...$(DEF_COLOR)\n" $@
-	@$(MAKE) -C $(MINILIBX_DIR) -s
-	@cp -u $(MINILIBX_DIR)/$(MINILIBX_INC_H) $(INCLUDE)
-	@cp $(MINILIBX_DIR)/$(MINILIBX) ./ 
+	@cd $(MINILIBX_DIR) && set -e && \
+		cmake -B build && \
+		cmake --build build -j4
+	@cp $(MINILIBX_DIR)/$(MINILIBX_INC_H) $(INCLUDE); 
+	@cp .tmp/minilibx-linux/build/$(MINILIBX) ./;
 	@printf "$(TERM_CLEAR_LINE)$(GREEN)Done copying archive $(BLUE)\"%s\"$(DEF_COLOR) !\n$(TERM_RESET)" $@
 
-relibft: fcleanlibs libft
+relibft: fcleanlibs lib
 
 # **************************************************************************** #
 #                                   Pipex                                      #

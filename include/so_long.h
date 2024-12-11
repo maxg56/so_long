@@ -6,16 +6,24 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 01:36:30 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/10 10:45:47 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/11 03:41:46 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "mlx.h"
+# include "MLX42.h"
 # include "libft.h"
-# include <fcntl.h> 
+# include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+#define WIDTH 512
+#define HEIGHT 512
+
+static mlx_image_t* image;
 
 # define KEY_ESC 53
 # define KEY_W 13
@@ -34,17 +42,21 @@
 # define COLLECT 'C'
 # define VIDE '0'
 
-typedef struct s_vex
+// so_long.h
+extern const int direction_offsets[4][2];
+
+typedef struct s_point
 {
 	int	x;
 	int	y;
-}	t_vex;
+}	t_point;
 
 typedef struct s_stack
 {
-	t_vex			*vex;
+	t_point			*vex;
 	struct s_stack	*next;
 }	t_stack;
+
 typedef struct s_map_info
 {
 	t_bool	player;
@@ -54,8 +66,7 @@ typedef struct s_map_info
 
 typedef struct s_window
 {
-	void	*mlx;
-	void	*win;
+	mlx_t  *mlx;
 	int		width;
 	int		height;
 	char	*title;
@@ -63,6 +74,7 @@ typedef struct s_window
 
 typedef struct s_map
 {
+	const int	direction_offsets;
 	const char	**map;
 	int			width;
 	int			height;
@@ -74,7 +86,7 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	t_vex	*pos;
+	t_point	*point;
 	int		moves;
 	int		pv;
 	void	*sprite;
@@ -94,16 +106,21 @@ t_game		*init_game(void);
 t_map_info	*init_val(void);
 
 t_bool		parse_input(int ac, char **av, t_game *game);
-t_bool		check_map_vide(t_game *game);
+t_bool		validate_map_playable(t_game *game);
+t_bool		validate_map_structure(t_game *game);
 
 //utils_stack
 
 t_stack		*ft_stacknew(int x, int y);
 void		ft_stackadd(t_stack **stak, t_stack *new);
-t_vex		*ft_stackget_back(t_stack **stack);
+t_point		*ft_stackget_back(t_stack **stack);
 
 char		**mapcpy(char **map, int height);
+int			open_map(char *path);
+//error
 
+void		error(char *message, t_game *game);
+void 		exit_game(t_game *game);
 // free
 
 void		free_map(t_map *map);

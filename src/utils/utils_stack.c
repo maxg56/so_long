@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 09:34:25 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/10 09:56:55 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/11 03:35:48 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_stack	*ft_stacknew(int x, int y)
 	if (!stak)
 		return (NULL);
 	stak->next = NULL;
-	stak->vex = malloc(sizeof(t_vex));
+	stak->vex = malloc(sizeof(t_point));
 	if (!stak->vex)
 		return (free(stak), NULL);
 	stak->vex->x = x;
@@ -36,20 +36,17 @@ void	ft_stackadd(t_stack **stak, t_stack *new)
 	*stak = new;
 }
 
-t_vex	*ft_stackget_back(t_stack **stack)
+t_point *ft_stackpop(t_stack **stack)
 {
-	t_stack	*tmp;
-	t_vex	*vex;
+	t_stack	*top;
+	t_point	*vex;
 
-	tmp = NULL;
-	while ((*stack)->next)
-	{
-		tmp = *stack;
-		*stack = (*stack)->next;
-	}
-	vex = (*stack)->vex;
-	if (tmp)
-		tmp->next = NULL;
-	free(*stack);
+	if (!stack || !*stack)
+		return (NULL);
+
+	top = *stack;
+	vex = top->vex;
+	*stack = top->next;
+	free(top);
 	return (vex);
 }

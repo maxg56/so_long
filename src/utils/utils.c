@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxence <maxence@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 02:37:42 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/10 17:45:47 by maxence          ###   ########.fr       */
+/*   Updated: 2024/12/11 02:22:31 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ t_player	*init_player(int x, int y, void *sprite)
 	player = malloc(sizeof(t_player));
 	if (!player)
 		return (NULL);
-	player->pos = malloc(sizeof(t_vex));
-	player->pos->x = x;
-	player->pos->y = y;
+	player->point = malloc(sizeof(t_point));
+	player->point->x = x;
+	player->point->y = y;
 	player->moves = 0;
 	player->pv = 3;
 	player->sprite = sprite;
@@ -51,7 +51,7 @@ t_game	*init_game(void)
 		return (NULL);
 	game->window = NULL;
 	game->maps = NULL;
-	game->player = NULL;
+	game->player = init_player(0, 0, NULL);
 	return (game);
 }
 

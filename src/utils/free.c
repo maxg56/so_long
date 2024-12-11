@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 07:25:45 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/10 09:56:10 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/11 00:03:14 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,31 @@
 
 void	free_map(t_map *map)
 {
-	while (map->height--)
-	{
-		free((void *)map->map[map->height]);
-	}
-	free_map_info(map->info);
-	free(map->map);
+	if (map->map != NULL)
+		free_tab((char **) map->map);
+	free(map->info);
 	free(map);
+}
+
+void	free_window(t_window *window)
+{
+	if (window->win)
+			free(window->mlx);
+	free(window);
 }
 
 void	free_game(t_game *game)
 {
-	free_map(game->maps);
-	free(game->player);
-	free(game->window);
+	if (game->maps)
+		free_map(game->maps);
+	if (game->player)
+		free(game->player);
+	if (game->window)
+		free_window(game->window);
 	free(game);
 }
+
+
 void	free_tab(char **tab)
 {
 	int	i;
@@ -55,7 +64,4 @@ void	free_stack(t_stack *stack)
 		free(tmp);
 	}
 }
-void	free_map_info(t_map_info *val)
-{
-	free(val);
-}
+
