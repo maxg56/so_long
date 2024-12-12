@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max_dev <max_dev@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 02:37:42 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/12 10:38:33 by max_dev          ###   ########.fr       */
+/*   Updated: 2024/12/12 14:14:14 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ mlx_image_t *open_image(char *path, mlx_t *mlx)
 	mlx_texture_t	*texture;
 
 	texture = mlx_load_png(path);
+	if (!texture)
+	{
+    	ft_putstr_fd("Error: texture not initialized\n", 2);
+    	exit(EXIT_FAILURE);
+	}
 	image = mlx_texture_to_image(mlx, texture);
 	mlx_delete_texture(texture);
 	return (image);

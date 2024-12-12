@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max_dev <max_dev@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 07:25:45 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/12 12:07:50 by max_dev          ###   ########.fr       */
+/*   Updated: 2024/12/12 16:57:01 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	free_map(t_map *map)
 
 void	free_window(t_window *window)
 {
-	mlx_close_window(window->mlx_instance);
+	
 	free(window);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_handling.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max_dev <max_dev@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 01:27:46 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/12 11:29:43 by max_dev          ###   ########.fr       */
+/*   Updated: 2024/12/12 16:21:17 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ void	set_coordinates(t_game *game )
 	game->player->sprite->instances[0].z = Z_DEFAULT_PLAYER;	
 }
 
+
 void set_instance_coordinates(mlx_image_t *sprite, int t, t_point *point, int z)
 {
 
-	sprite->instances[t].x = (point->x * TILE_SIZE);
+	sprite->instances[t].x = (point->x * TILE_SIZE) ;
 	sprite->instances[t].y = (point->y * TILE_SIZE);
 	if (z)
 		sprite->instances[t].z = z;

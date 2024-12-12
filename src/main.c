@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max_dev <max_dev@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 01:48:58 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/12 12:19:27 by max_dev          ###   ########.fr       */
+/*   Updated: 2024/12/12 16:48:56 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ void key_hook(mlx_key_data_t keydata, void *param)
     if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
 	{
     	if (mlx_is_key_down(g->window->mlx_instance, MLX_KEY_ESCAPE))
-    	{
     	    exit_game(g);
-    	    return;
-    	}
 		if (mlx_is_key_down(g->window->mlx_instance, MLX_KEY_UP) || mlx_is_key_down(g->window->mlx_instance, MLX_KEY_W))
 			move_player(g, 0, -1); 
 		if (mlx_is_key_down(g->window->mlx_instance, MLX_KEY_DOWN) || mlx_is_key_down(g->window->mlx_instance, MLX_KEY_S))
@@ -51,6 +48,8 @@ void key_hook(mlx_key_data_t keydata, void *param)
 	}
 	
 }
+
+
 
 int	main(int argc, char **argv)
 {
@@ -67,16 +66,14 @@ int	main(int argc, char **argv)
 				(game->map->height * TILE_SIZE ));
 	if (!game->window)
 		return (error("Malloc failed", game), EXIT_FAILURE);
-	game->player->sprite = open_image("09.png", game->window->mlx_instance);
-	
+	game->player->sprite = open_image(PATH_SPRITE_PLAYER, game->window->mlx_instance);
 	mlx_image_to_window(game->window->mlx_instance, game->player->sprite, 0, 0);
-	
+	printf("2");
 	set_map(game);
-	set_corde(game);
+	set_coordinates(game);
 	mlx_loop_hook(game->window->mlx_instance, ft_hook, game);
 	mlx_key_hook(game->window->mlx_instance, key_hook, game);
+	mlx_close_hook(game->window->mlx_instance, exit_game, game);
 	mlx_loop(game->window->mlx_instance);
-	mlx_terminate(game->window->mlx_instance);
 	return (EXIT_SUCCESS);
 }
-

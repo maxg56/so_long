@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max_dev <max_dev@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 07:11:35 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/12 12:19:26 by max_dev          ###   ########.fr       */
+/*   Updated: 2024/12/12 14:00:38 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ static t_bool	check_map_cell(t_game *game, int x, int y)
 		game->player->position->y = y;
 		return (TRUE);
 	}
-	else if (game->map->map_data[x][y] == EXIT && !game->map->info->has_exit)
+	else if (game->map->map_data[x][y] == EXIT)
 	{
-		if (!game->map->info->has_player)
+		if (!game->map->info->has_exit)
 			game->map->info->has_exit = TRUE;
 		return (TRUE);
 	}
@@ -59,7 +59,7 @@ static t_bool	validate_map_structure(t_game *game)
 	if (!check_map_borders(game))
 		return (FALSE);
 	x = 1;
-	while (x < game->map->height - 1)
+	while (x < game->map->height )
 	{
 		y = 0;
 		if (game->map->map_data[x][0] != WAll ||
@@ -113,18 +113,18 @@ void	check_path(t_game *game)
 	int  collexct;
 
 	if (validate_map_structure(game) == FALSE)
-		error("Invalid map (impossible to complete)", game);
+		error("[1]Invalid map (impossible to complete)", game);
 	map = mapcpy(game->map->map_data, game->map->height);
 	if (!map)
 		error("Malloc failed 444", game);
-	free(game->map->info);
 	collexct = game->map->info->collectibles;
-	game->map->info = init_val();
+	free(game->map->info);
+	game->map->info = init_map_info();
 	flood_fill(game, game->player->position->x, game->player->position->y, map);
 	if (game->map->info->has_exit != TRUE || game->map->info->collectibles != collexct)
 	{
 		free_tab(map);
-		error("Invalid map (impossible to complete)", game);
+		error("[2]Invalid map (impossible to complete)", game);
 	}
 	free_tab(map);
 }

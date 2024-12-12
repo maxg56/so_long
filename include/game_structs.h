@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_structs.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max_dev <max_dev@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:47:03 by max_dev           #+#    #+#             */
-/*   Updated: 2024/12/12 11:47:34 by max_dev          ###   ########.fr       */
+/*   Updated: 2024/12/12 17:23:17 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ typedef struct s_map
 	char		**map_data;
 	int			width;
 	int			height;
-	mlx_image_t	*sprite_empty;
+	mlx_image_t	*sprite_void;
 	mlx_image_t	*sprite_wall;
 	mlx_image_t	*sprite_exit;
 	mlx_image_t	*sprite_collect;
+	mlx_image_t	*sprite_wotre;
 	t_map_info	*info;
 }	t_map;
 
@@ -62,5 +63,6 @@ typedef struct s_game
 	t_map		*map;
 	t_player	*player;
 }	t_game;
+
 
 #endif

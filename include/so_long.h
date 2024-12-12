@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max_dev <max_dev@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 01:36:30 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/12 12:26:57 by max_dev          ###   ########.fr       */
+/*   Updated: 2024/12/12 17:34:06 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,16 @@ static mlx_key_data_t keydata;
 
 
 # define TILE_SIZE 64
+# define Z_BACKGROUND 0
 # define Z_DEFAULT 1
-# define Z_DEFAULT_PLAYER 3
+# define Z_DEFAULT_PLAYER 5
 
 # define PATH_SPRITE_PLAYER "assets/player.png"
 # define PATH_SPRITE_WALL "assets/wall.png"
-# define PATH_SPRITE_EXIT "assets/exit.pug"
+# define PATH_SPRITE_EXIT "assets/exit.png"
 # define PATH_SPRITE_COLLECT "assets/collect.png"
 # define PATH_SPRITE_VOID "assets/empty.png"
+# define PATH_SPRITE_WOTRE "assets/4.png"
 
 # define PLAYER 'P'
 # define WAll '1'
@@ -60,14 +62,13 @@ char		**mapcpy(char **map, int height);
 int			open_map(char *path);
 
 void		set_map(t_game *game);
-void		set_corde(t_game *game);
 void		set_instance_coordinates(mlx_image_t *sprite, int t, t_point *point, int z);
 void		set_instance_z(mlx_image_t *sprite,int t, int z);
 void		move_player(t_game *game, int x, int y);
 //error
-
+void		set_coordinates(t_game *game );
 void		error(char *message, t_game *game);
-void 		exit_game(t_game *game);
+void 		exit_game( void *param);
 
 // free
 
