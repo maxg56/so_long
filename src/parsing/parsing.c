@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: max_dev <max_dev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 02:36:24 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/11 20:21:30 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/12 12:07:49 by max_dev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,12 @@ t_bool	parse_input(int ac, char **av, t_game *game)
 		path = "maps/p1.bar";
 	else
 		path = av[1];
-	maps = check_map_len(path, game->maps, maps);
+	maps = check_map_len(path, game->map, maps);
 	if (!maps)
 		return (free(maps), error(" map error", game), FALSE);
-	game->maps->map = (const char **)ft_split(maps, '\n');
+	game->map->map_data = (const char **)ft_split(maps, '\n');
 	free(maps);
-	if (!game->maps->map)
+	if (!game->map->map_data)
 		return (error(" map error", game), FALSE);
 	check_path(game);
 	return (TRUE);

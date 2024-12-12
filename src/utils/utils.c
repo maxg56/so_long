@@ -3,46 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: max_dev <max_dev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 02:37:42 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/12 01:27:21 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/12 10:38:33 by max_dev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_map	*init_map(void)
-{
-	t_map	*map_struct;
 
-	map_struct = malloc(sizeof(t_map));
-	if (!map_struct)
-		return (NULL);
-	map_struct->map = NULL;
-	map_struct->info = init_val();
-	map_struct->width = 0;
-	map_struct->height = 0;
-	return (map_struct);
-}
-
-t_player	*init_player(int x, int y, void *sprite)
-{
-	t_player	*player;
-
-	player = malloc(sizeof(t_player));
-	if (!player)
-		return (NULL);
-	player->point = malloc(sizeof(t_point));
-	if (!player->point)
-		return (free(player), NULL);
-	player->point->x = x;
-	player->point->y = y;
-	player->moves = 0;
-	player->pv = 3;
-	player->sprite = sprite;
-	return (player);
-}
 
 mlx_image_t *open_image(char *path, mlx_t *mlx)
 {
@@ -55,33 +25,7 @@ mlx_image_t *open_image(char *path, mlx_t *mlx)
 	return (image);
 }
 
-t_game	*init_game(void)
-{
-	t_game	*game;
 
-	game = malloc(sizeof(t_game));
-	if (!game)
-		return (NULL);
-	game->window = NULL;
-	game->maps = NULL;
-	game->player = init_player(0, 0, NULL);
-	if (!game->player)
-		return (free(game), NULL);
-	return (game);
-}
-
-t_map_info	*init_val(void)
-{
-	t_map_info	*val;
-
-	val = malloc(sizeof(t_map_info));
-	if (!val)
-		return (NULL);
-	val->player = FALSE;
-	val->exit = FALSE;
-	val->collect = 0;
-	return (val);
-}
 
 char	**mapcpy(char **map, int height)
 {

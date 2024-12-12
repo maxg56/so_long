@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: max_dev <max_dev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 07:25:45 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/12 00:46:50 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/12 12:07:50 by max_dev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,29 @@
 
 void	free_map(t_map *map)
 {
-	if (map->map != NULL)
-		free_tab((char **) map->map);
+	if (map->map_data != NULL)
+		free_tab(map->map_data);
 	free(map->info);
 	free(map);
 }
 
 void	free_window(t_window *window)
 {
-	mlx_close_window(window->mlx);
-	if (window->mlx)
-			free(window->mlx);
+	mlx_close_window(window->mlx_instance);
 	free(window);
 }
 
 void free_player(t_player *player)
 {
-	if (player->point)
-		free(player->point);
+	if (player->position)
+		free(player->position);
 	free(player);
 }
 
 void	free_game(t_game *game)
 {
-	if (game->maps)
-		free_map(game->maps);
+	if (game->map)
+		free_map(game->map);
 	if (game->player)
 		free_player(game->player);
 	if (game->window)

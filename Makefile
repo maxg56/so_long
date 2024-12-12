@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+         #
+#    By: max_dev <max_dev@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 15:53:44 by mgendrot          #+#    #+#              #
-#    Updated: 2024/12/12 03:06:47 by mgendrot         ###   ########.fr        #
+#    Updated: 2024/12/12 11:30:05 by max_dev          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,10 +63,10 @@ SRC_DIR         = src/
 MAP_DIR         =  $(SRC_DIR)map/
 UTILS_DIR       =  $(SRC_DIR)utils/
 PRSIG_DIR       =  $(SRC_DIR)parsing/
-SRC_FILES       =   main windo 
-SRC_MAP		 =   check_map render_map
-SRC_UTILS	 =   utils  free Erore pi
-SRC_PRSIG	 =   parsing parsing_pas
+SRC_FILES       =   main windo  player_movement
+SRC_MAP		 	=   check_map render_map
+SRC_UTILS		=   utils  free Erore sprite_handling init
+SRC_PRSIG	 	=   parsing parsing_pas
 
 
 
