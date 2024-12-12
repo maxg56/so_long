@@ -6,54 +6,40 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 22:34:11 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/10 22:40:24 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/12 08:21:09 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	render_sprite(t_game *game, int y, int x)
-{
-	if (game->maps->map[y][x] == PLAYER)
-	{
-		mlx_put_image_to_window(game->window->mlx, game->window->win, \
-		game->player->ptr, (x * game->sprite_size), (y * game->sprite_size));
-	}
-	else if (game->maps->map[y][x] == EXIT)
-	{
-		game->->x = x * game->sprite_size;
-		game->portal->y = y * game->sprite_size;
-		mlx_put_image_to_window(game->window->mlx, game->window->win, \
-		game->portal->ptr, (x * game->sprite_size), (y * game->sprite_size));
-	}
-	else if (game->maps->map[y][x] == '1')
-		mlx_put_image_to_window(game->window->mlx, game->window->win, \
-		game->wall->ptr, (x * game->sprite_size), (y * game->sprite_size));
-	else if (game->maps->map[y][x] == 'C')
-	{
-		mlx_put_image_to_window(game->window->mlx, game->window->win, \
-		game->collect->ptr, (x * game->sprite_size), (y * game->sprite_size));
-	}
-	else
-		mlx_put_image_to_window(game->window->mlx, game->window->win, \
-		game->floor->ptr, (x * game->sprite_size), (y * game->sprite_size));
-}
 
-void	render_map(t_game *game)
+void	set_map(t_game *game)
 {
-	t_point	coord;
+	int	x;
+	int	y;
+	int	tx_i;
 
-	coord.y = 0;
-	while (game->maps->map[coord.y])
+	tx_i = 0;
+	y = 0;
+	while (y < game->maps->height)
 	{
-		coord.x = 0;
-		while (game->maps->map[coord.y][coord.x])
+		x = 0;
+		while (x < game->maps->width)
 		{
-			render_sprite(game, coord.y, coord.x);
-			coord.x++;
+			if (game->maps->map[y][x] == MUR )
+			{
+				if (tx_i == 0)
+				{
+					game->maps->sprat_void = open_image("Water.png", game->window->mlx);
+				}
+				mlx_image_to_window(game->window->mlx, game->maps->sprat_void, x *64, y*64);
+				set_z(game->maps->sprat_void,tx_i,1);
+				tx_i++;
+				
+			}
+			x++;
 		}
-		coord.y++;
+		y++;
 	}
-	return ;
 }
 

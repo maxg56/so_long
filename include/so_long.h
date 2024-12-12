@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxence <maxence@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 01:36:30 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/11 06:28:32 by maxence          ###   ########.fr       */
+/*   Updated: 2024/12/12 08:29:35 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,12 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#define WIDTH 512
-#define HEIGHT 512
 
-//static mlx_image_t* image;
 
-# define KEY_ESC 53
-# define KEY_W 13
-# define KEY_A 0
-# define KEY_S 1
-# define KEY_D 2
+static mlx_image_t* image;
+static mlx_key_data_t keydata;
+
+# define w 6464
 
 # define PATH_SPRITE_PLAYER "assets/player.xpm"
 # define PATH_SPRITE_MUR "assets/mur.xpm"
@@ -51,11 +47,7 @@ typedef struct s_point
 	int	y;
 }	t_point;
 
-typedef struct s_stack
-{
-	t_point			*vex;
-	struct s_stack	*next;
-}	t_stack;
+
 
 typedef struct s_map_info
 {
@@ -75,21 +67,21 @@ typedef struct s_window
 typedef struct s_map
 {
 	const int	direction_offsets;
-	const char	**map;
+ 	char		**map;
 	int			width;
 	int			height;
-	void		*sprat_void;
-	void		*sprat_mur;
-	void		*sprat_exit;
+	mlx_image_t *sprat_void;
+	mlx_image_t	*sprat_mur;
+	mlx_image_t	*sprat_exit;
 	t_map_info	*info;
 }	t_map;
 
 typedef struct s_player
 {
 	t_point	*point;
-	int		moves;
-	int		pv;
-	void	*sprite;
+	int			moves;
+	int			pv;
+	mlx_image_t	*sprite;
 }	t_player;
 
 typedef struct s_game
@@ -97,6 +89,7 @@ typedef struct s_game
 	t_window	*window;
 	t_map		*maps;
 	t_player	*player;
+	const int	direction_offsets;
 }	t_game;
 
 t_window	*init_window(char *title, int width, int height);
@@ -106,27 +99,29 @@ t_game		*init_game(void);
 t_map_info	*init_val(void);
 
 t_bool		parse_input(int ac, char **av, t_game *game);
-t_bool		dfs(t_game *game);
-t_bool		validate_map_structure(t_game *game);
+void		check_path(t_game *game);
 
-//utils_stack
 
-t_stack		*ft_stacknew(int x, int y);
-void		ft_stackadd(t_stack **stak, t_stack *new);
-t_point		*ft_stackpop(t_stack *stack);
+mlx_image_t *open_image(char *path, mlx_t *mlx);
 
 char		**mapcpy(char **map, int height);
 int			open_map(char *path);
+
+void		set_map(t_game *game);
+void 		set_corde_inst(mlx_image_t *sprite, int t, t_point *point, int z);
+void		set_z(mlx_image_t *sprite, int t,int z);
+void		set_corde(t_game *game);
+void		move_player(t_game *game, int x, int y);
 //error
 
 void		error(char *message, t_game *game);
 void 		exit_game(t_game *game);
+
 // free
 
 void		free_map(t_map *map);
 void		free_game(t_game *game);
 void		free_map_info(t_map_info *val);
 void		free_tab(char **tab);
-void		free_stack(t_stack *stack);
 
 #endif

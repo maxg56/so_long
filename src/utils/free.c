@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 07:25:45 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/11 03:45:43 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/12 00:46:50 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,17 @@ void	free_map(t_map *map)
 
 void	free_window(t_window *window)
 {
+	mlx_close_window(window->mlx);
 	if (window->mlx)
 			free(window->mlx);
 	free(window);
+}
+
+void free_player(t_player *player)
+{
+	if (player->point)
+		free(player->point);
+	free(player);
 }
 
 void	free_game(t_game *game)
@@ -32,7 +40,7 @@ void	free_game(t_game *game)
 	if (game->maps)
 		free_map(game->maps);
 	if (game->player)
-		free(game->player);
+		free_player(game->player);
 	if (game->window)
 		free_window(game->window);
 	free(game);
@@ -43,6 +51,8 @@ void	free_tab(char **tab)
 {
 	int	i;
 
+	if (!tab)
+		return ;
 	i = 0;
 	while (tab[i])
 	{
@@ -52,16 +62,4 @@ void	free_tab(char **tab)
 	free(tab);
 }
 
-void	free_stack(t_stack *stack)
-{
-	t_stack	*tmp;
-
-	while (stack)
-	{
-		tmp = stack;
-		stack = stack->next;
-		free(tmp->vex);
-		free(tmp);
-	}
-}
 

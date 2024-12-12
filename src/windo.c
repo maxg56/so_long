@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 02:06:11 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/11 02:02:41 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/11 21:47:01 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,9 @@ t_window	*init_window(char *title, int width, int height)
 	window->height = height;
 	window->title = title;
 	window->mlx = mlx_init(width, height, title, true);
+	if (!window->mlx)
+		return (free(window), puts(mlx_strerror(mlx_errno)), NULL);
 	return (window);
 }
+
+

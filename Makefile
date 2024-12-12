@@ -6,7 +6,7 @@
 #    By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 15:53:44 by mgendrot          #+#    #+#              #
-#    Updated: 2024/12/11 01:33:20 by mgendrot         ###   ########.fr        #
+#    Updated: 2024/12/12 03:06:47 by mgendrot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,9 @@ INCLUDE     = include
 
 TMP 	   = .tmp/
 CC          = cc 
-CFLAGS      = -Wall -Wextra -Werror -g
+CFLAGS      = -Wall -Wextra -Werror -g 
 
+CFLAGS_Dbeug = -fsanitize=address
 RM          = rm -f
 MKDIR       = mkdir
 
@@ -63,8 +64,8 @@ MAP_DIR         =  $(SRC_DIR)map/
 UTILS_DIR       =  $(SRC_DIR)utils/
 PRSIG_DIR       =  $(SRC_DIR)parsing/
 SRC_FILES       =   main windo 
-SRC_MAP		 =   check_map check_map_validate
-SRC_UTILS	 =   utils   free utils_stack Erore
+SRC_MAP		 =   check_map render_map
+SRC_UTILS	 =   utils  free Erore pi
 SRC_PRSIG	 =   parsing parsing_pas
 
 
