@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:20:16 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/14 01:04:30 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/14 03:53:41 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,14 @@ void	parse_flag(int argc, char **argv, t_init_game *game)
 	i = 0;
 	if (game->flag->g)
 	{
-		game->paths[i] = ft_strdup("map/p1.ber");
+		game->paths[i] = ft_strdup("maps/p1.ber");
 		i++;
 	}
 	while (i < game->flag->ndmap)
 	{
 		game->paths[i] = ft_strdup(argv[i + game->flag->count]);
-		if (!game->paths[i])
+		if (!game->paths[i++])
             exit_error("Failed to allocate memory for path", game);
-		i++;
 	}
-	write(1, "flag parsed\n", 12);
 	game->paths[i] = NULL;
 }

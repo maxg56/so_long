@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 02:37:42 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/14 03:44:55 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/14 03:51:58 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ mlx_image_t	*open_image(char *path, mlx_t *mlx)
 
 	texture = mlx_load_png(path);
 	if (!texture)
-		return (error("Error: texture not initialized", NULL), -1);
+		error("Error: texture not initialized", NULL);
 	image = mlx_texture_to_image(mlx, texture);
 	mlx_delete_texture(texture);
 	return (image);
