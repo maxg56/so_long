@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max_dev <max_dev@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:37:34 by max_dev           #+#    #+#             */
-/*   Updated: 2024/12/12 11:30:01 by max_dev          ###   ########.fr       */
+/*   Updated: 2024/12/13 23:40:09 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,41 +23,46 @@ t_map	*init_map(void)
 	map_struct->info = init_map_info();
 	map_struct->width = 0;
 	map_struct->height = 0;
+	map_struct->sprite_void = init_sprite_map();
+	map_struct->sprite_wall = init_sprite();
+	map_struct->sprite_exit = init_sprite();
+	map_struct->sprite_collect = init_sprite();
+	map_struct->sprite_wotre = init_sprite();
 	return (map_struct);
 }
 
-t_player	*init_player(int x, int y, void *sprite)
+t_point	*init_point(void)
+{
+	t_point	*point;
+
+	point = malloc(sizeof(t_point));
+	if (!point)
+		return (NULL);
+	point->x = 0;
+	point->y = 0;
+	point->z = 0;
+	return (point);
+}
+
+t_player	*init_player(int x, int y)
 {
 	t_player	*player;
 
 	player = malloc(sizeof(t_player));
 	if (!player)
 		return (NULL);
-	player->position = malloc(sizeof(t_point));
+	player->position = init_point();
 	if (!player->position)
 		return (free(player), NULL);
 	player->position->x = x;
 	player->position->y = y;
 	player->move_count = 0;
 	player->health_points = 3;
-	player->sprite = sprite;
+	player->sprite = init_sprite();
 	return (player);
 }
 
-t_game	*init_game(void)
-{
-	t_game	*game;
 
-	game = malloc(sizeof(t_game));
-	if (!game)
-		return (NULL);
-	game->window = NULL;
-	game->map = NULL;
-	game->player = init_player(0, 0, NULL);
-	if (!game->player)
-		return (free(game), NULL);
-	return (game);
-}
 
 t_map_info	*init_map_info(void)
 {

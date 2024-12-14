@@ -1,0 +1,3 @@
+--keep-debuginfo=yes
+
+--suppressions=.tmp/minilibx/mlx42.supp

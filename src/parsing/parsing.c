@@ -6,14 +6,11 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 02:36:24 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/12 16:42:55 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/14 01:21:07 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "so_long.h"
-
-
 
 static size_t	get_line_length(char *line)
 {
@@ -40,7 +37,6 @@ static char	*check_map_len(
 	line = get_next_line(fd_map);
 	if (!line)
 		return (free(maps), NULL);
-	map->height = 0;
 	while (line)
 	{
 		line_len = get_line_length(line);
@@ -52,37 +48,28 @@ static char	*check_map_len(
 		if (!new_maps)
 			return (free(line), free(maps), close(fd_map), NULL);
 		free(maps);
-		maps = new_maps;
 		free(line);
+		maps = new_maps;
 		line = get_next_line(fd_map);
 		map->height++;
 	}
-	return (close(fd_map),maps);
+	return (close(fd_map), maps);
 }
 
-
-t_bool	parse_input(int ac, char **av, t_game *game)
+t_bool	open_and_check_map(t_game *game, char *path)
 {
-	char		*path;
-	char		*maps;
+	char	*maps;
 
-	if (ac != 2)
-		return (error("Invalid number of arguments", game), FALSE);
 	maps = ft_strdup("");
 	if (!maps)
 		return (error("Malloc failed\n map error", game), FALSE);
-	if (ft_strcmp(av[1], "-g") == 0)
-		path = "maps/p1.bar";
-	else
-		path = av[1];
 	maps = check_map_len(path, game->map, maps);
 	if (!maps)
-		return (error("[1] map error", game), FALSE);
+		return (error("map error", game), FALSE);
 	game->map->map_data = ft_split(maps, '\n');
 	free(maps);
 	if (!game->map->map_data)
 		return (error("[2]map error", game), FALSE);
-	check_path(game);
-	return (TRUE);
+	printf("map %c\n", game->map->map_data[0][0]);
+	return (check_path(game));
 }
-

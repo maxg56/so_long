@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: max_dev <max_dev@student.42.fr>            +#+  +:+       +#+         #
+#    By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 15:53:44 by mgendrot          #+#    #+#              #
-#    Updated: 2024/12/12 11:30:05 by max_dev          ###   ########.fr        #
+#    Updated: 2024/12/13 23:24:46 by mgendrot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,12 @@ INCLUDE     = include
 
 TMP 	   = .tmp/
 CC          = cc 
-CFLAGS      = -Wall -Wextra -Werror -g 
+CFLAGS_Dbeug = -fsanitize=address -fsanitize=undefined -g
+CFLAGS      = -Wall -Wextra -Werror -g
 
-CFLAGS_Dbeug = -fsanitize=address
 RM          = rm -f
 MKDIR       = mkdir
+CLONE 		= git clone --depth=1
 
 LIBFT_DIR       = $(TMP)libft/
 LIBFT_CFLAGS     = -L . -l ft
@@ -30,12 +31,12 @@ LIBFT           = libft.a
 LIBFT_INC_H       =  include/libft.h
 LIBFT_GIT	   	=  https://github.com/maxg56/libft.git
 
-MINILIBX_DIR    = $(TMP)minilibx-linux/
+MINILIBX_DIR    = $(TMP)minilibx/
 MINILIBX_CFLAGS =  libmlx42.a -ldl -lglfw -pthread -lm
 MINILIBX         = libmlx42.a
 MINILIBX_INC_H    = include/MLX42/*.h
 MINILIBX_INC_H_F  = include/MLX42.h include/MLX42_lnt.h
-MINILIBX_GIT    = https://github.com/codam-coding-college/MLX42.git
+MINILIBX_GIT    =  https://github.com/kodokaii/MLX42.git
 
 # **************************************************************************** #
 #                                   Colors                                     #
@@ -63,10 +64,10 @@ SRC_DIR         = src/
 MAP_DIR         =  $(SRC_DIR)map/
 UTILS_DIR       =  $(SRC_DIR)utils/
 PRSIG_DIR       =  $(SRC_DIR)parsing/
-SRC_FILES       =   main windo  player_movement
-SRC_MAP		 	=   check_map render_map
-SRC_UTILS		=   utils  free Erore sprite_handling init
-SRC_PRSIG	 	=   parsing parsing_pas
+SRC_FILES       =   main  player_movement 
+SRC_MAP		 	=   check_map render_map choose_tase
+SRC_UTILS		=   utils  free Erore sprite_handling init usils_list_int sprite_usils unload window 
+SRC_PRSIG	 	=   parsing parsing_pas parsimg_flag
 
 
 
@@ -140,14 +141,14 @@ $(LIBFT):
 $(MINILIBX):
 	@if [ ! -d "$(MINILIBX_DIR)/.git" ]; then \
 		printf "$(TERM_YELLOW)Cloning third party library \"%s\" in \"%s\"...\n$(DEF_COLOR)" $(MINILIBX_GIT) $(MINILIBX); \
-		git clone $(MINILIBX_GIT) $(MINILIBX_DIR); \
+		$(CLONE) $(MINILIBX_GIT) $(MINILIBX_DIR); \
 	fi
 	@printf "$(MAGENTA)Making archive $(TERM_BLUE)\"%s\"$(MAGENTA)...$(DEF_COLOR)\n" $@
 	@cd $(MINILIBX_DIR) && set -e && \
 		cmake -B build && \
 		cmake --build build -j4
 	@cp $(MINILIBX_DIR)/$(MINILIBX_INC_H) $(INCLUDE); 
-	@cp .tmp/minilibx-linux/build/$(MINILIBX) ./;
+	@cp .tmp/minilibx/build/$(MINILIBX) ./;
 	@printf "$(TERM_CLEAR_LINE)$(GREEN)Done copying archive $(BLUE)\"%s\"$(DEF_COLOR) !\n$(TERM_RESET)" $@
 
 relibft: fcleanlibs lib
