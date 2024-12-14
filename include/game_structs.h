@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:47:03 by max_dev           #+#    #+#             */
-/*   Updated: 2024/12/13 22:44:21 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/14 05:11:10 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_map
 	t_sprite		*sprite_exit;
 	t_sprite		*sprite_collect;
 	t_sprite		*sprite_wotre;
+	t_sprite		*sprite_ui;
 	t_map_info		*info;
 }	t_map;
 

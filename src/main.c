@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 01:48:58 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/14 03:41:19 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/14 04:35:13 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 			mlx_is_key_down(g->window->mlx_instance, MLX_KEY_D))
 			move_player(g, 1, 0);
 	}
-
 }
 
 void	lood_game(t_init_game *ig)
@@ -84,7 +83,6 @@ void	lood_game(t_init_game *ig)
 	}
 	set_player(game);
 	set_map(game);
-
 }
 
 int	main(int argc, char **argv)

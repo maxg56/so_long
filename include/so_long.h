@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 01:36:30 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/14 02:35:13 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/14 05:58:45 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static mlx_key_data_t keydata;
 # define Z_BACKGROUND 0
 # define Z_DEFAULT 1
 # define Z_DEFAULT_PLAYER 5
+# define Z_DEFAULT_UI 10
 
 # define PATH_SPRITE_PLAYER "assets/player.png"
 # define PATH_SPRITE_WALL "assets/wall.png"
@@ -53,8 +54,10 @@ static mlx_key_data_t keydata;
 # define PATH_SPRITE_VOID_SW "assets/empty/empty_SW.png"
 # define PATH_SPRITE_VOID_SE "assets/empty/empty_SE.png"
 # define PATH_SPRITE_VOID_SEW "assets/empty/empty_SEW.png"
+# define PATH_SPRITE_UI "assets/ui.png"
 
 # define PATH_SPRITE_WOTRE "assets/4.png"
+
 
 # define PLAYER 'P'
 # define WAll '1'
@@ -112,7 +115,7 @@ void		move_player(t_game *game, int x, int y);
 void		set_coordinates(t_game *game );
 void		exit_error(char *message, t_init_game *game);
 void		error(char *message, t_game *game);
-void	closed_game(t_init_game	*g);
+void		closed_game(t_init_game	*g);
 void		exit_game( void *param);
 
 // uload

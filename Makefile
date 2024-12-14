@@ -6,7 +6,7 @@
 #    By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 15:53:44 by mgendrot          #+#    #+#              #
-#    Updated: 2024/12/13 23:24:46 by mgendrot         ###   ########.fr        #
+#    Updated: 2024/12/14 05:59:56 by mgendrot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,7 @@ UTILS_DIR       =  $(SRC_DIR)utils/
 PRSIG_DIR       =  $(SRC_DIR)parsing/
 SRC_FILES       =   main  player_movement 
 SRC_MAP		 	=   check_map render_map choose_tase
-SRC_UTILS		=   utils  free Erore sprite_handling init usils_list_int sprite_usils unload window 
+SRC_UTILS		=   utils  free free_2 Erore sprite_handling init usils_list_int sprite_usils unload window 
 SRC_PRSIG	 	=   parsing parsing_pas parsimg_flag
 
 

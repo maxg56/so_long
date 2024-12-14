@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:37:34 by max_dev           #+#    #+#             */
-/*   Updated: 2024/12/13 23:40:09 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/14 05:43:17 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_map	*init_map(void)
 	map_struct->sprite_exit = init_sprite();
 	map_struct->sprite_collect = init_sprite();
 	map_struct->sprite_wotre = init_sprite();
+	map_struct->sprite_ui = init_sprite();
 	return (map_struct);
 }
 
@@ -61,8 +62,6 @@ t_player	*init_player(int x, int y)
 	player->sprite = init_sprite();
 	return (player);
 }
-
-
 
 t_map_info	*init_map_info(void)
 {

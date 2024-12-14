@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 07:11:35 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/14 01:20:30 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/14 05:45:10 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static t_bool	check_map_borders(t_game *game)
 	int		x;
 
 	x = 0;
-
 	while (game->map->map_data[0][x] != '\0')
 	{
 		if (game->map->map_data[0][x] != WAll)
@@ -31,7 +30,7 @@ static t_bool	check_map_borders(t_game *game)
 
 static t_bool	check_map_cell(t_game *game, int x, int y)
 {
-	if (game->map->map_data[y][x] == PLAYER )
+	if (game->map->map_data[y][x] == PLAYER)
 	{
 		game->map->info->has_player = TRUE;
 		game->player->position->x = x;
@@ -74,8 +73,8 @@ static t_bool	validate_map_structure(t_game *game)
 		}
 		y++;
 	}
-	if (!game->map->info->has_player ||
-		!game->map->info->has_exit ||
+	if (!game->map->info->has_player || \
+		!game->map->info->has_exit || \
 		game->map->info->collectibles < 1)
 		return (FALSE);
 	return (TRUE);
@@ -104,19 +103,12 @@ t_bool	check_path(t_game *game)
 {
 	char	**map;
 	int		collexct;
-	for (int i=0;i<game->map->height;i++)
-	{
-		printf("%s\n", game->map->map_data[i]);
-	}
+
 	if (validate_map_structure(game) == FALSE)
 		return (error("[1] Invalid map (impossible to complete)", game), FALSE);
 	map = mapcpy(game->map->map_data, game->map->height);
 	if (!map)
 		error("Malloc failed", game);
-	for (int i=0;i<game->map->height;i++)
-	{
-		printf("%s\n", map[i]);
-	}
 	collexct = game->map->info->collectibles;
 	free(game->map->info);
 	game->map->info = init_map_info();

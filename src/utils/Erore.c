@@ -6,12 +6,11 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 19:19:14 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/14 03:04:48 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/14 05:41:35 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
 
 void	exit_error(char *message, t_init_game *game)
 {
@@ -28,8 +27,6 @@ void	error(char *message, t_game *game)
 	if (game)
 		free_game(game);
 }
-
-
 
 void	closed_game(t_init_game	*g)
 {

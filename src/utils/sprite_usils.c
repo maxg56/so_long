@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:35:03 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/14 02:53:31 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/14 05:43:30 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,20 @@ void	nuw_sprite(t_game *game, t_sprite *s, char *path)
 	s->id = id;
 }
 
-
-
 void	set_tlse(t_game *game, t_sprite *sprite, t_point *point, char *path)
+{
+	t_list_int	*instance_index ;
+
+	if (sprite->id == -1)
+		nuw_sprite(game, sprite, path);
+	instance_index = get_int_list(&game->sprites_id, sprite->id);
+	mlx_image_to_window(game->window->mlx_instance, sprite->sprite,
+		point->x * TILE_SIZE, point->y * TILE_SIZE);
+	set_instance_z(sprite->sprite, instance_index->content, point->z);
+	instance_index->content++;
+}
+
+void	set_tlse_x(t_game *game, t_sprite *sprite, t_point *point, char *path)
 {
 	t_list_int	*instance_index ;
 

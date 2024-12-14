@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:20:16 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/14 03:53:41 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/14 03:55:45 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	parse_flag(int argc, char **argv, t_init_game *game)
 	{
 		game->paths[i] = ft_strdup(argv[i + game->flag->count]);
 		if (!game->paths[i++])
-            exit_error("Failed to allocate memory for path", game);
+			exit_error("Failed to allocate memory for path", game);
 	}
 	game->paths[i] = NULL;
 }

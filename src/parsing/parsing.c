@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 02:36:24 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/14 03:51:09 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/14 05:55:06 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,15 @@ static char	*check_map_len(
 	size_t	line_len;
 
 	fd_map = open_map(path);
+	if (fd_map < 0)
+		return (free(maps), NULL);
 	line = get_next_line(fd_map);
 	if (!line)
 		return (free(maps), NULL);
 	while (line)
 	{
 		line_len = get_line_length(line);
-		if (map->width == 0)
+		if (map->width == 0 )
 			map->width = line_len;
 		else if (map->width != (int)line_len)
 			return (free(line), free(maps), close(fd_map), NULL);
