@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 02:36:24 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/15 06:06:39 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/15 21:11:30 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static t_bool	check_map_len(t_map *map, char *line)
 		return (FALSE);
 	return (TRUE);
 }
-
 
 static char	*check_len_and_open(
 	char *path,

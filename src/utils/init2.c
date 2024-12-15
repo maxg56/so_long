@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window.c                                           :+:      :+:    :+:   */
+/*   init2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 02:06:11 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/15 06:31:28 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/15 21:25:10 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_game	*init_game(void)
 		return (NULL);
 	game->sprite_move = NULL;
 	game->sprite_pv = NULL;
-	game->fps = 60;
+	game->fps = 30;
 	game->enemy = NULL;
 	return (game);
 }
@@ -62,7 +62,7 @@ t_flag	*init_flag(void)
 		return (NULL);
 	flag->bnse = FALSE;
 	flag->r = FALSE;
-	flag->g = FALSE;
+	flag->d = FALSE;
 	flag->count = 1;
 	flag->ndmap = 0;
 	return (flag);

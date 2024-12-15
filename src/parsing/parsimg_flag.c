@@ -6,24 +6,24 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:20:16 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/15 01:33:16 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/15 21:19:40 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	set_flag(t_flag *flag, t_bool r, t_bool g)
+static void	set_flag(t_flag *flag, t_bool r, t_bool d)
 {
 	if (r)
 	{
 		flag->r = r;
 		flag->count++;
 	}
-	if (g)
-		flag->g = g;
+	if (d)
+		flag->d = d;
 }
 
-void	get_falg( int argc, char **argv, t_init_game *game)
+static void	get_falg( int argc, char **argv, t_init_game *game)
 {
 	int		i;
 	t_bool	flag;
@@ -34,7 +34,7 @@ void	get_falg( int argc, char **argv, t_init_game *game)
 	{
 		if (ft_strcmp(argv[i], "-r") == 0)
 			set_flag(game->flag, TRUE, FALSE);
-		if (ft_strcmp(argv[i], "-g") == 0)
+		if (ft_strcmp(argv[i], "-d") == 0)
 			set_flag(game->flag, FALSE, TRUE);
 		if (ft_strcmp(argv[i], "-rg") == 0 || ft_strcmp(argv[i], "-gr") == 0)
 			set_flag(game->flag, TRUE, TRUE);
@@ -57,7 +57,7 @@ void	parse_flag(int argc, char **argv, t_init_game *game)
 	if (argc != 2 && game->flag->r == FALSE)
 		exit_error("Invalid number of arguments");
 	i = 0;
-	if (game->flag->g)
+	if (game->flag->d)
 	{
 		game->paths[i] = ft_strdup("maps/p1.ber");
 		i++;

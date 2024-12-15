@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:47:03 by max_dev           #+#    #+#             */
-/*   Updated: 2024/12/15 21:19:26 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/15 20:32:00 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,32 @@ typedef struct s_window
 	char	*title;
 }	t_window;
 
-typedef struct s_tile_flags
+typedef struct s_t
 {
 	t_bool	w;
 	t_bool	e;
 	t_bool	n;
 	t_bool	s;
-}	t_tile_flags;
+}	tile_flags;
 
 typedef struct s_sprite_map
 {
 	t_sprite	*sprite;
 	t_sprite	*sprite_e;
-	t_sprite	*sprite_ew;
+	t_sprite	*sprite_ens;
+	t_sprite	*sprite_ews;
 	t_sprite	*sprite_w;
+	t_sprite	*sprite_wns;
 	t_sprite	*sprite_n;
 	t_sprite	*sprite_ns;
 	t_sprite	*sprite_nw;
 	t_sprite	*sprite_ne;
+	t_sprite	*sprite_new;
+	t_sprite	*sprite_news;
 	t_sprite	*sprite_s;
 	t_sprite	*sprite_sw;
 	t_sprite	*sprite_se;
+	t_sprite	*sprite_sew;
 }	t_sprite_map;
 
 typedef struct s_map
@@ -99,11 +104,12 @@ typedef struct s_enemy
 	t_sprite	*sprite;
 }	t_enemy;
 
+
 typedef struct s_flag
 {
 	t_bool		bnse;
 	t_bool		r;
-	t_bool		d;
+	t_bool		g;
 	int			count;
 	int			ndmap;
 }	t_flag;

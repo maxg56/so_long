@@ -6,7 +6,7 @@
 #    By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 15:53:44 by mgendrot          #+#    #+#              #
-#    Updated: 2024/12/15 03:46:53 by mgendrot         ###   ########.fr        #
+#    Updated: 2024/12/15 21:07:41 by mgendrot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,10 +64,11 @@ SRC_DIR         = src/
 MAP_DIR         =  $(SRC_DIR)map/
 UTILS_DIR       =  $(SRC_DIR)utils/
 PRSIG_DIR       =  $(SRC_DIR)parsing/
-SRC_FILES       =   main  player
+SRC_FILES       =   main 
 SRC_MAP		 	=   check_map render_map choose_tase 
-SRC_UTILS		=   utils  Erore sprite_handling init usils_list_int sprite_usils unload window enemy
-SRC_PRSIG	 	=   parsing parsing_pas parsimg_flag
+SRC_UTILS		=   utils Erore init init2 usils_list_int \
+					sprite_usils unload player
+SRC_PRSIG	 	=   parsing parsing_utils parsimg_flag
 
 
 

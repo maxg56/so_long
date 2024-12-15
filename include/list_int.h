@@ -6,13 +6,12 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:25:10 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/15 00:38:38 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/15 21:16:02 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIST_INT_H
 # define LIST_INT_H
-
 
 # include <stdlib.h>
 # include "libft.h"

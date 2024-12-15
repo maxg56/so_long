@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 07:11:35 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/15 07:05:52 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/15 21:10:47 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_bool	check_map_borders(t_game *game)
 	int		x;
 
 	x = 0;
-	while ( x < game->map->width)
+	while (x < game->map->width)
 	{
 		if (game->map->map_data[0][x] != WAll)
 			return (FALSE);
@@ -48,11 +48,6 @@ static t_bool	check_map_cell(t_game *game, int x, int y)
 	else if (game->map->map_data[y][x] == WAll ||
 			game->map->map_data[y][x] == VOID)
 		return (TRUE);
-	else if (game->map->map_data[y][x] == ENEMY)
-	{
-		game->enemy[game->map->info->enemies++] = init_enemy(x, y);
-		return (TRUE);
-	}
 	return (FALSE);
 }
 
@@ -109,7 +104,6 @@ t_bool	check_path(t_game *game)
 	char	**map;
 	int		collexct;
 
-	game->enemy = ft_arnalloc(sizeof(t_enemy *) * cote_enemy(game));
 	if (validate_map_structure(game) == FALSE)
 		return (exit_error("[1] Invalid map (impossible to complete)"), FALSE);
 	map = mapcpy(game->map->map_data, game->map->height);
@@ -120,8 +114,6 @@ t_bool	check_path(t_game *game)
 	flood_fill(game, game->player->position->x, game->player->position->y, map);
 	if (game->map->info->has_exit != TRUE || \
 		game->map->info->collectibles != collexct)
-	{
-		return (exit_error("[2]Invalid map (impossible to complete)"), FALSE);
-	}
+		exit_error("[2]Invalid map (impossible to complete)");
 	return (TRUE);
 }
