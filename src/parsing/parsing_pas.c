@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 22:47:57 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/14 04:05:00 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/15 00:32:17 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	open_map(char *path)
 	if (ft_strcmp(path, "0") == 0)
 		return (0);
 	if (is_ber_file(path))
-		return (error("Invalid file extension", NULL), -1);
+		return (exit_error("Invalid file extension"), -1);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		return (error("open map", NULL), -1);
+		return (exit_error("open map"), -1);
 	return (fd);
 }

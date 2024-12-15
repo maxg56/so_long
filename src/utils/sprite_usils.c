@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:35:03 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/14 05:43:30 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/15 01:33:16 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_sprite_map	*init_sprite_map(void)
 {
 	t_sprite_map	*sprite_map;
 
-	sprite_map = malloc(sizeof(t_sprite_map));
+	sprite_map = ft_arnalloc(sizeof(t_sprite_map));
 	sprite_map->sprite = init_sprite();
 	sprite_map->sprite_e = init_sprite();
 	sprite_map->sprite_ens = init_sprite();
@@ -40,7 +40,7 @@ t_sprite	*init_sprite(void)
 {
 	t_sprite	*sprite;
 
-	sprite = malloc(sizeof(t_sprite));
+	sprite = ft_arnalloc(sizeof(t_sprite));
 	sprite->sprite = NULL;
 	sprite->id = -1;
 	return (sprite);

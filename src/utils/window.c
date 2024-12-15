@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 02:06:11 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/14 03:43:16 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/15 06:31:28 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_window	*init_window(char *title, int width, int height)
 {
 	t_window	*window;
 
-	window = malloc(sizeof(t_window));
+	window = ft_arnalloc(sizeof(t_window));
 	if (!window)
 		return (NULL);
 	window->width = width;
@@ -24,7 +24,7 @@ t_window	*init_window(char *title, int width, int height)
 	window->title = title;
 	window->mlx_instance = mlx_init(width, height, title, true);
 	if (!window->mlx_instance)
-		return (free(window), puts(mlx_strerror(mlx_errno)), NULL);
+		return (puts(mlx_strerror(mlx_errno)), NULL);
 	return (window);
 }
 
@@ -32,18 +32,24 @@ t_game	*init_game(void)
 {
 	t_game	*game;
 
-	game = malloc(sizeof(t_game));
+	game = ft_arnalloc(sizeof(t_game));
 	if (!game)
 		return (NULL);
-	game->window = NULL;
+	game->window = ft_arnalloc(sizeof(t_window));
 	game->map = init_map();
+	if (!game->map)
+		exit_error("Map initialization failed");
 	game->game_satu = TRUE;
 	game->player = init_player(0, 0);
 	if (!game->player)
-		return (free(game), NULL);
+		return (NULL);
 	game->sprites_id = init_int_list();
 	if (!game->sprites_id)
-		return (free(game), NULL);
+		return (NULL);
+	game->sprite_move = NULL;
+	game->sprite_pv = NULL;
+	game->fps = 60;
+	game->enemy = NULL;
 	return (game);
 }
 
@@ -51,7 +57,7 @@ t_flag	*init_flag(void)
 {
 	t_flag	*flag;
 
-	flag = malloc(sizeof(t_flag));
+	flag = ft_arnalloc(sizeof(t_flag));
 	if (!flag)
 		return (NULL);
 	flag->bnse = FALSE;
@@ -66,7 +72,7 @@ t_init_game	*init_init_game(void)
 {
 	t_init_game	*g;
 
-	g = malloc(sizeof(t_init_game));
+	g = ft_arnalloc(sizeof(t_init_game));
 	if (!g)
 		return (NULL);
 	g->flag = init_flag();
@@ -74,5 +80,6 @@ t_init_game	*init_init_game(void)
 	g->game = NULL;
 	g->i_game = 0;
 	g->window = NULL;
+	g->game_satu = FALSE;
 	return (g);
 }

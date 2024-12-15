@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:25:10 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/13 22:07:56 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/15 00:38:38 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 
 # include <stdlib.h>
+# include "libft.h"
 
 typedef struct s_list_int
 {

@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:47:03 by max_dev           #+#    #+#             */
-/*   Updated: 2024/12/14 05:11:10 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/15 07:07:04 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_map_info
 	t_bool	has_player;
 	t_bool	has_exit;
 	int		collectibles;
+	int		enemys;
 }	t_map_info;
 
 typedef struct s_window
@@ -82,6 +83,7 @@ typedef struct s_map
 	t_sprite		*sprite_collect;
 	t_sprite		*sprite_wotre;
 	t_sprite		*sprite_ui;
+	t_sprite		*sprite_enemy;
 	t_map_info		*info;
 }	t_map;
 
@@ -92,6 +94,16 @@ typedef struct s_player
 	int			health_points;
 	t_sprite	*sprite;
 }	t_player;
+
+typedef struct s_enemy
+{
+	int			nb;
+	t_point		*position;
+	int			move_count;
+	int			health_points;
+	t_sprite	*sprite;
+}	t_enemy;
+
 
 typedef struct s_flag
 {
@@ -104,11 +116,15 @@ typedef struct s_flag
 
 typedef struct s_game
 {
+	int			fps;
 	t_window	*window;
 	t_map		*map;
 	t_player	*player;
 	t_list_int	*sprites_id;
 	t_bool		game_satu;
+	t_enemy		**enemy;
+	mlx_image_t	*sprite_move;
+	mlx_image_t	*sprite_pv;
 }	t_game;
 
 typedef struct s_init_game
@@ -118,6 +134,7 @@ typedef struct s_init_game
 	t_flag		*flag;
 	char		**paths;
 	t_window	*window;
+	t_bool		game_satu;
 }	t_init_game;
 
 #endif

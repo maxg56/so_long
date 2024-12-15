@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:37:34 by max_dev           #+#    #+#             */
-/*   Updated: 2024/12/14 05:43:17 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/15 07:05:34 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_map	*init_map(void)
 {
 	t_map	*map_struct;
 
-	map_struct = malloc(sizeof(t_map));
+	map_struct = ft_arnalloc(sizeof(t_map));
 	if (!map_struct)
 		return (NULL);
 	map_struct->map_data = NULL;
@@ -29,6 +29,7 @@ t_map	*init_map(void)
 	map_struct->sprite_collect = init_sprite();
 	map_struct->sprite_wotre = init_sprite();
 	map_struct->sprite_ui = init_sprite();
+	map_struct->sprite_enemy = init_sprite();
 	return (map_struct);
 }
 
@@ -36,7 +37,7 @@ t_point	*init_point(void)
 {
 	t_point	*point;
 
-	point = malloc(sizeof(t_point));
+	point = ft_arnalloc(sizeof(t_point));
 	if (!point)
 		return (NULL);
 	point->x = 0;
@@ -49,17 +50,15 @@ t_player	*init_player(int x, int y)
 {
 	t_player	*player;
 
-	player = malloc(sizeof(t_player));
+	player = ft_arnalloc(sizeof(t_player));
 	if (!player)
 		return (NULL);
+	player->sprite = init_sprite();
 	player->position = init_point();
-	if (!player->position)
-		return (free(player), NULL);
-	player->position->x = x;
-	player->position->y = y;
 	player->move_count = 0;
 	player->health_points = 3;
-	player->sprite = init_sprite();
+	player->position->x = x;
+	player->position->y = y;
 	return (player);
 }
 
@@ -67,11 +66,12 @@ t_map_info	*init_map_info(void)
 {
 	t_map_info	*info;
 
-	info = malloc(sizeof(t_map_info));
+	info = ft_arnalloc(sizeof(t_map_info));
 	if (!info)
 		return (NULL);
 	info->has_player = FALSE;
 	info->has_exit = FALSE;
 	info->collectibles = 0;
+	info->enemys = 0;
 	return (info);
 }

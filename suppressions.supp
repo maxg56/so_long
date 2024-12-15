@@ -1,0 +1,5 @@
+{ 
+  Ignore ioctl warnings
+  Memcheck:Warning
+  fun:ioctl
+}

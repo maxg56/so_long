@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:20:16 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/14 03:55:45 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/15 01:33:16 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ void	parse_flag(int argc, char **argv, t_init_game *game)
 	i = 0;
 	get_falg(argc, argv, game);
 	if (game->flag->ndmap < 1)
-		exit_error("Invalid number of maps", game);
-	game->game = malloc(sizeof(t_game *) * game->flag->ndmap);
-	game->paths = malloc(sizeof(char *) * (game->flag->ndmap + 1));
+		exit_error("Invalid number of maps");
+	game->game = ft_arnalloc(sizeof(t_game *) * game->flag->ndmap);
+	game->paths = ft_arnalloc(sizeof(char *) * (game->flag->ndmap + 1));
 	while (i < game->flag->ndmap)
 		game->game[i++] = init_game();
 	if (argc != 2 && game->flag->r == FALSE)
-		exit_error("Invalid number of arguments", game);
+		exit_error("Invalid number of arguments");
 	i = 0;
 	if (game->flag->g)
 	{
@@ -66,7 +66,7 @@ void	parse_flag(int argc, char **argv, t_init_game *game)
 	{
 		game->paths[i] = ft_strdup(argv[i + game->flag->count]);
 		if (!game->paths[i++])
-			exit_error("Failed to allocate memory for path", game);
+			exit_error("Failed to allocate memory for path");
 	}
 	game->paths[i] = NULL;
 }

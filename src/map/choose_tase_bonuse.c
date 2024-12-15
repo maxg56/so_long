@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   choose_tase.c                                      :+:      :+:    :+:   */
+/*   choose_tase_bonuse.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 14:08:26 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/14 07:04:02 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/15 02:00:42 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static t_t	*cont_tatse(t_game *s_game, t_point *point)
 {
 	t_t	*t;
 
-	t = malloc(sizeof(t_t));
+	t = ft_arnalloc(sizeof(t_t));
 	t->w = FALSE;
 	t->e = FALSE;
 	t->s = FALSE;
@@ -56,7 +56,6 @@ void	_choose_tatse(t_game *game, t_point *point, t_sprite_map *sm, t_t *t)
 		set_tlse(game, sm->sprite_s, point, PATH_SPRITE_VOID_S);
 	else
 		set_tlse(game, game->map->sprite_void->sprite, point, PATH_SPRITE_VOID);
-	free(t);
 }
 
 void	choose_tatse_buse(t_game *game, t_point *point)

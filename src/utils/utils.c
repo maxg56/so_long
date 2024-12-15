@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 02:37:42 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/14 03:51:58 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/15 06:50:17 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ mlx_image_t	*open_image(char *path, mlx_t *mlx)
 
 	texture = mlx_load_png(path);
 	if (!texture)
-		error("Error: texture not initialized", NULL);
+		exit_error("Error: texture not initialized");
 	image = mlx_texture_to_image(mlx, texture);
 	mlx_delete_texture(texture);
+	if ( !image)
+		exit_error("Error: image or instances not initialized");
 	return (image);
 }
 
@@ -30,7 +32,7 @@ char	**mapcpy(char **map, int height)
 	char	**new_map;
 	int		i;
 
-	new_map = malloc(sizeof(char *) * (height + 1));
+	new_map = ft_arnalloc(sizeof(char *) * (height + 1));
 	if (!new_map)
 		return (NULL);
 	i = 0;
@@ -39,9 +41,6 @@ char	**mapcpy(char **map, int height)
 		new_map[i] = ft_strdup(map[i]);
 		if (!new_map[i])
 		{
-			while (i >= 0)
-				free(new_map[i--]);
-			free_tab(new_map);
 			return (NULL);
 		}
 		i++;

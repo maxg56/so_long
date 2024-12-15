@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 22:34:11 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/14 06:57:22 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/15 02:26:49 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	set_bak_boms(t_game *game)
 		}
 		point->y++;
 	}
-	free(point);
 }
 
 void	set_bak(t_game *g)
@@ -38,14 +37,14 @@ void	set_bak(t_game *g)
 
 	point = init_point();
 	point->z = Z_BACKGROUND;
-	point->y = 1;
-	while (point->y < g->map->height - 1)
+	point->y = 0;
+	while (point->y <= g->map->height - 1)
 	{
-		point->x = 1;
-		while (point->x < g->map->width -1)
+		point->x = 0;
+		while (point->x <= g->map->width -1)
 		{
-			if (point->x == 1 || point->x == g->map->width - 2 || \
-				point->y == 1 || point->y == g->map->height - 2)
+			if (point->x == 0 || point->x == g->map->width - 1 || \
+				point->y == 0 || point->y == g->map->height - 1)
 				choose_tatse(g, point);
 			else
 				set_tlse(g, g->map->sprite_void->sprite, point, \
@@ -54,7 +53,6 @@ void	set_bak(t_game *g)
 		}
 		point->y++;
 	}
-	free(point);
 }
 
 void	set_ui(t_game *g, t_sprite *sprite)
@@ -71,7 +69,7 @@ void	set_map(t_game *g)
 	t_point	*point;
 
 	set_ui(g, g->map->sprite_ui);
-	set_bak_boms(g);
+	set_bak(g);
 	point = init_point();
 	point->z = Z_DEFAULT;
 	while (point->y < g->map->height)
@@ -85,9 +83,10 @@ void	set_map(t_game *g)
 				set_tlse(g, g->map->sprite_exit, point, PATH_SPRITE_EXIT);
 			else if (g->map->map_data[point->y][point->x] == COLLECT)
 				set_tlse(g, g->map->sprite_collect, point, PATH_SPRITE_COLLECT);
+			else if (g->map->map_data[point->y][point->x] == ENEMY)
+				set_tlse(g, g->map->sprite_enemy, point, PATH_SPRITE_ENEMY);
 			point->x++;
 		}
 		point->y++;
 	}
-	free(point);
 }
