@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+         #
+#    By: maxence <maxence@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 15:53:44 by mgendrot          #+#    #+#              #
-#    Updated: 2024/12/15 21:07:41 by mgendrot         ###   ########.fr        #
+#    Updated: 2024/12/20 21:30:11 by maxence          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,18 +25,18 @@ RM          = rm -f
 MKDIR       = mkdir
 CLONE 		= git clone --depth=1
 
-LIBFT_DIR       = $(TMP)libft/
+LIBFT_DIR       = libe/libft/
 LIBFT_CFLAGS     = -L . -l ft
 LIBFT           = libft.a
 LIBFT_INC_H       =  include/libft.h
 LIBFT_GIT	   	=  https://github.com/maxg56/libft.git
 
-MINILIBX_DIR    = $(TMP)minilibx/
+MINILIBX_DIR    = libe/minilibx/
 MINILIBX_CFLAGS =  libmlx42.a -ldl -lglfw -pthread -lm
 MINILIBX         = libmlx42.a
 MINILIBX_INC_H    = include/MLX42/*.h
 MINILIBX_INC_H_F  = include/MLX42.h include/MLX42_lnt.h
-MINILIBX_GIT    =  https://github.com/kodokaii/MLX42.git
+
 
 # **************************************************************************** #
 #                                   Colors                                     #
@@ -129,10 +129,6 @@ fcleanlibs:
 lib : $(LIBFT) $(MINILIBX)
 
 $(LIBFT):
-	@if [ ! -d "$(LIBFT_DIR)/.git" ]; then \
-		printf "$(TERM_YELLOW)Cloning third party library \"%s\" in \"%s\"...\n$(DEF_COLOR)" $(LIBFT_GIT) $(LIBFT);\
-		git clone $(LIBFT_GIT) $(LIBFT_DIR) ;\
-	fi
 	@printf "$(MAGENTA)Making archive $(TERM_BLUE)\"%s\"$(MAGENTA)...$(DEF_COLOR)\n" $@
 	@$(MAKE) -C $(LIBFT_DIR) -s
 	@cp -u $(LIBFT_DIR)/$(LIBFT_INC_H) $(INCLUDE)
@@ -140,16 +136,12 @@ $(LIBFT):
 	@printf "$(TERM_CLEAR_LINE)$(GREEN)Done copying archive $(BLUE)\"%s\"$(DEF_COLOR) !\n$(TERM_RESET)" $@
 
 $(MINILIBX):
-	@if [ ! -d "$(MINILIBX_DIR)/.git" ]; then \
-		printf "$(TERM_YELLOW)Cloning third party library \"%s\" in \"%s\"...\n$(DEF_COLOR)" $(MINILIBX_GIT) $(MINILIBX); \
-		$(CLONE) $(MINILIBX_GIT) $(MINILIBX_DIR); \
-	fi
 	@printf "$(MAGENTA)Making archive $(TERM_BLUE)\"%s\"$(MAGENTA)...$(DEF_COLOR)\n" $@
 	@cd $(MINILIBX_DIR) && set -e && \
 		cmake -B build && \
 		cmake --build build -j4
 	@cp $(MINILIBX_DIR)/$(MINILIBX_INC_H) $(INCLUDE); 
-	@cp .tmp/minilibx/build/$(MINILIBX) ./;
+	@cp libe/minilibx/build/$(MINILIBX) ./;
 	@printf "$(TERM_CLEAR_LINE)$(GREEN)Done copying archive $(BLUE)\"%s\"$(DEF_COLOR) !\n$(TERM_RESET)" $@
 
 relibft: fcleanlibs lib
