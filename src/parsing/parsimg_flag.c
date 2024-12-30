@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsimg_flag.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxence <maxence@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:20:16 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/20 21:16:03 by maxence          ###   ########.fr       */
+/*   Updated: 2024/12/30 14:48:27 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	set_flag(t_flag *flag, t_bool r, t_bool d)
 static void	get_falg( int argc, char **argv, t_init_game *game)
 {
 	int		i;
-	
+
 	i = 0;
 	while (++i < argc)
 	{
