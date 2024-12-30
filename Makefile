@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maxence <maxence@student.42.fr>            +#+  +:+       +#+         #
+#    By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 15:53:44 by mgendrot          #+#    #+#              #
-#    Updated: 2024/12/20 21:30:11 by maxence          ###   ########.fr        #
+#    Updated: 2024/12/30 15:09:19 by mgendrot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,11 +29,11 @@ LIBFT_DIR       = libe/libft/
 LIBFT_CFLAGS     = -L . -l ft
 LIBFT           = libft.a
 LIBFT_INC_H       =  include/libft.h
-LIBFT_GIT	   	=  https://github.com/maxg56/libft.git
 
-MINILIBX_DIR    = libe/minilibx/
+MINILIBX_DIR    = libe/MLX42/
 MINILIBX_CFLAGS =  libmlx42.a -ldl -lglfw -pthread -lm
 MINILIBX         = libmlx42.a
+LIBMLX_PATH = libe/MLX42/build/libmlx42.a
 MINILIBX_INC_H    = include/MLX42/*.h
 MINILIBX_INC_H_F  = include/MLX42.h include/MLX42_lnt.h
 
@@ -141,7 +141,7 @@ $(MINILIBX):
 		cmake -B build && \
 		cmake --build build -j4
 	@cp $(MINILIBX_DIR)/$(MINILIBX_INC_H) $(INCLUDE); 
-	@cp libe/minilibx/build/$(MINILIBX) ./;
+	@cp $(LIBMLX_PATH) .
 	@printf "$(TERM_CLEAR_LINE)$(GREEN)Done copying archive $(BLUE)\"%s\"$(DEF_COLOR) !\n$(TERM_RESET)" $@
 
 relibft: fcleanlibs lib
