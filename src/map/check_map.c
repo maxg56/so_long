@@ -6,13 +6,13 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 07:11:35 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/15 21:10:47 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/30 16:07:25 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static t_bool	check_map_borders(t_game *game)
+static t_bool	check_map_borders(t_data_map *game)
 {
 	int		x;
 
@@ -28,7 +28,7 @@ static t_bool	check_map_borders(t_game *game)
 	return (TRUE);
 }
 
-static t_bool	check_map_cell(t_game *game, int x, int y)
+static t_bool	check_map_cell(t_data_map *game, int x, int y)
 {
 	if (game->map->map_data[y][x] == PLAYER)
 	{
@@ -51,7 +51,7 @@ static t_bool	check_map_cell(t_game *game, int x, int y)
 	return (FALSE);
 }
 
-static t_bool	validate_map_structure(t_game *game)
+static t_bool	validate_map_structure(t_data_map *game)
 {
 	int		x;
 	int		y;
@@ -80,7 +80,7 @@ static t_bool	validate_map_structure(t_game *game)
 	return (TRUE);
 }
 
-static void	flood_fill(t_game *game, int x, int y, char **map)
+static void	flood_fill(t_data_map *game, int x, int y, char **map)
 {
 	if (y < 0 || y >= game->map->height || x < 0 || x >= game->map->width)
 		return ;
@@ -99,7 +99,7 @@ static void	flood_fill(t_game *game, int x, int y, char **map)
 	flood_fill(game, x, y + 1, map);
 }
 
-t_bool	check_path(t_game *game)
+t_bool	check_path(t_data_map *game)
 {
 	char	**map;
 	int		collexct;

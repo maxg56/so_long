@@ -6,13 +6,13 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 07:05:05 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/15 21:11:10 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/30 16:07:25 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static t_tile_flags	*initialize_tile_flags(t_game *game, t_point *point)
+static t_tile_flags	*initialize_tile_flags(t_data_map *game, t_point *point)
 {
 	t_tile_flags	*tile_flags;
 
@@ -24,7 +24,7 @@ static t_tile_flags	*initialize_tile_flags(t_game *game, t_point *point)
 	return (tile_flags);
 }
 
-void	choose_tile_sprite(t_game *game, t_point *point)
+void	choose_tile_sprite(t_data_map *game, t_point *point)
 {
 	t_tile_flags	*t;
 	t_sprite_map	*sm;

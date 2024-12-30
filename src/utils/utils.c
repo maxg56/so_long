@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 02:37:42 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/15 21:08:36 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/30 16:07:25 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ mlx_image_t	*load_sprite_image(char *path, mlx_t *mlx)
 	return (image);
 }
 
-void	set_player_coordinates(t_game *game )
+void	set_player_coordinates(t_data_map *game )
 {
 	int	tmp;
 

@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:47:03 by max_dev           #+#    #+#             */
-/*   Updated: 2024/12/15 21:19:26 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/30 16:22:46 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,34 @@ typedef struct s_map
 	t_map_info		*info;
 }	t_map;
 
+typedef struct	s_coord {
+	uint32_t x;
+	uint32_t y;
+	uint32_t width;
+	uint32_t height;
+}				t_coord;
+typedef struct	s_data_sprite {
+	mlx_texture_t *texture_png;
+	mlx_image_t* img;
+	uint32_t sprite_width;
+	uint32_t sprite_height;
+	uint32_t sheet_width;
+	uint32_t sheet_height;
+	u_int8_t nb_instances;
+	t_coord coord;
+	char main_cara;
+	char animate;
+	int stats;
+}				t_data_sprite;
+
+typedef struct	s_tab_sprite {
+	int nb_sprite;
+	int x_main;
+	int y_main;
+	//t_data_map *data_map;
+	t_data_sprite **tab_sprite;
+}				t_tab_sprite;
+
 typedef struct s_player
 {
 	t_point		*position;
@@ -108,27 +136,27 @@ typedef struct s_flag
 	int			ndmap;
 }	t_flag;
 
-typedef struct s_game
+typedef struct s_data_map
 {
 	int			fps;
 	t_window	*window;
 	t_map		*map;
 	t_player	*player;
 	t_list_int	*sprites_id;
-	t_bool		game_satu;
+	//t_bool		game_satu;
 	t_enemy		**enemy;
 	mlx_image_t	*sprite_move;
 	mlx_image_t	*sprite_pv;
-}	t_game;
+}	t_data_map;
 
-typedef struct s_init_game
+typedef struct s_game
 {
-	t_game		**game;
+	t_data_map	**game;
 	int			i_game;
 	t_flag		*flag;
 	char		**paths;
 	t_window	*window;
 	t_bool		game_satu;
-}	t_init_game;
+}	t_game;
 
 #endif

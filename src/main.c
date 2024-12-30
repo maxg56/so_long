@@ -6,13 +6,13 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 01:48:58 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/15 20:06:49 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/30 16:24:10 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	finch_game(t_init_game *game)
+static void	finch_game(t_game *game)
 {
 	game->game_satu = FALSE;
 	if (game->i_game == game->flag->ndmap - 1)
@@ -23,10 +23,10 @@ static void	finch_game(t_init_game *game)
 
 static void	ft_hook(void *game)
 {
-	t_game		*g;
-	t_init_game	*gi;
+	t_data_map		*g;
+	t_game	*gi;
 
-	gi = (t_init_game *)game;
+	gi = (t_game *)game;
 	if (gi->game_satu)
 	{
 		g = gi->game[gi->i_game];
@@ -45,10 +45,10 @@ static void	ft_hook(void *game)
 
 static void	key_hook(mlx_key_data_t keydata, void *param)
 {
-	t_init_game	*ig;
-	t_game		*g;
+	t_game	*ig;
+	t_data_map		*g;
 
-	ig = (t_init_game *)param;
+	ig = (t_game *)param;
 	if (ig->game_satu)
 		g = ig->game[ig->i_game];
 	if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT) && \
@@ -71,9 +71,9 @@ static void	key_hook(mlx_key_data_t keydata, void *param)
 	}
 }
 
-void	lood_game(t_init_game *ig)
+void	lood_game(t_game *ig)
 {
-	t_game		*game;
+	t_data_map		*game;
 
 	game = ig->game[ig->i_game];
 	if (ig->window == NULL)
@@ -100,7 +100,7 @@ void	lood_game(t_init_game *ig)
 
 int	main(int argc, char **argv)
 {
-	t_init_game	*init_game;
+	t_game	*init_game;
 	int			i;
 
 	init_game = init_init_game();

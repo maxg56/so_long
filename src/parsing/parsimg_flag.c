@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:20:16 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/30 14:48:27 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/30 16:24:10 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	set_flag(t_flag *flag, t_bool r, t_bool d)
 		flag->d = d;
 }
 
-static void	get_falg( int argc, char **argv, t_init_game *game)
+static void	get_falg( int argc, char **argv, t_game *game)
 {
 	int		i;
 
@@ -40,7 +40,7 @@ static void	get_falg( int argc, char **argv, t_init_game *game)
 	game->flag->ndmap = argc - game->flag->count;
 }
 
-void	parse_flag(int argc, char **argv, t_init_game *game)
+void	parse_flag(int argc, char **argv, t_game *game)
 {
 	int	i;
 
@@ -48,7 +48,7 @@ void	parse_flag(int argc, char **argv, t_init_game *game)
 	get_falg(argc, argv, game);
 	if (game->flag->ndmap < 1)
 		exit_error("Invalid number of maps");
-	game->game = ft_arnalloc(sizeof(t_game *) * game->flag->ndmap);
+	game->game = ft_arnalloc(sizeof(t_data_map *) * game->flag->ndmap);
 	game->paths = ft_arnalloc(sizeof(char *) * (game->flag->ndmap + 1));
 	while (i < game->flag->ndmap)
 		game->game[i++] = init_game();

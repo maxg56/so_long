@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 01:36:30 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/15 21:27:28 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/30 16:24:10 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,17 @@ typedef enum e_ement
 
 // set
 
-void			set_move(t_game *game );
-void			set_pv(t_game *game);
-void			set_blak(t_game *game);
-void			set_tile(t_game *game, t_sprite *sprite, t_point *point, \
+void			set_move(t_data_map *game );
+void			set_pv(t_data_map *game);
+void			set_blak(t_data_map *game);
+void			set_tile(t_data_map *game, t_sprite *sprite, t_point *point, \
 char *path);
-void			set_tlse_z(t_game *game, t_sprite *sprite, t_point *point, \
+void			set_tlse_z(t_data_map *game, t_sprite *sprite, t_point *point, \
 char *path);
-void			set_player(t_game *game);
-void			set_map(t_game *game);
-void			lood_game(t_init_game *ig);
-t_bool			open_and_check_map(t_game *game, char *path);
+void			set_player(t_data_map *game);
+void			set_map(t_data_map *game);
+void			lood_game(t_game *ig);
+t_bool			open_and_check_map(t_data_map *game, char *path);
 //init
 
 t_sprite		*init_sprite(void);
@@ -76,18 +76,18 @@ t_point			*init_point(void);
 t_window		*init_window(char *title, int width, int height);
 t_map			*init_map(void);
 t_player		*init_player(int x, int y);
-t_game			*init_game(void);
+t_data_map			*init_game(void);
 t_map_info		*init_map_info(void);
 t_flag			*init_flag(void);
-t_init_game		*init_init_game(void);
+t_game		*init_init_game(void);
 t_sprite_map	*init_sprite_map(void);
 
 //parse
 
-void			parse_flag(int argc, char **argv, t_init_game *game);
-t_bool			open_and_check_map(t_game *game, char *path);
-t_bool			parse_input(int ac, char **av, t_game *game);
-t_bool			check_path(t_game *game);
+void			parse_flag(int argc, char **argv, t_game *game);
+t_bool			open_and_check_map(t_data_map *game, char *path);
+t_bool			parse_input(int ac, char **av, t_data_map *game);
+t_bool			check_path(t_data_map *game);
 
 // utils
 
@@ -97,17 +97,17 @@ char			**mapcpy(char **map, int height);
 
 void			set_instance_coordinates(mlx_image_t *sprite, int t, \
 t_point *point, int z);
-void			move_player(t_game *game, int x, int y);
+void			move_player(t_data_map *game, int x, int y);
 
 //error
 
-void			set_player_coordinates(t_game *game );
-void			closed_game(t_init_game	*g);
+void			set_player_coordinates(t_data_map *game );
+void			closed_game(t_game	*g);
 void			exit_error(char *message);
 void			exit_game( void *param);
 
 // uload
 
-void			unload_add(t_game *game);
-void			choose_tile_sprite(t_game *game, t_point *point);
+void			unload_add(t_data_map *game);
+void			choose_tile_sprite(t_data_map *game, t_point *point);
 #endif

@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 19:19:14 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/15 21:08:08 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/30 16:24:10 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	error(char *message)
 	ft_dprintf(2, RED"Error:\n%s\n"DEF_COLOR, message);
 }
 
-void	closed_game(t_init_game	*g)
+void	closed_game(t_game	*g)
 {
 	unload_add(g->game[g->i_game]);
 	g->i_game++;
@@ -33,9 +33,9 @@ void	closed_game(t_init_game	*g)
 
 void	exit_game( void *param)
 {
-	t_init_game	*game ;
+	t_game	*game ;
 
-	game = (t_init_game *)param;
+	game = (t_game *)param;
 	mlx_close_window(game->window->mlx_instance);
 	mlx_terminate(game->window->mlx_instance);
 	ft_arna_free();

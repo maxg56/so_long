@@ -6,13 +6,13 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:35:03 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/15 21:04:12 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/30 16:07:25 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	load_sprite(t_game *game, t_sprite *s, char *path)
+static void	load_sprite(t_data_map *game, t_sprite *s, char *path)
 {
 	int	id;
 
@@ -57,7 +57,7 @@ t_sprite_map	*init_sprite_map(void)
 	return (sprite_map);
 }
 
-void	set_tile(t_game *game, t_sprite *sprite, t_point *point, char *path)
+void	set_tile(t_data_map *game, t_sprite *sprite, t_point *point, char *path)
 {
 	t_list_int	*instance_index ;
 

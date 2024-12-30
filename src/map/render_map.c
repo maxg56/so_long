@@ -6,13 +6,13 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 22:34:11 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/15 20:59:18 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/30 16:07:25 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	set_background_tiles(t_game *g)
+static void	set_background_tiles(t_data_map *g)
 {
 	t_point	*point;
 
@@ -36,7 +36,7 @@ static void	set_background_tiles(t_game *g)
 	}
 }
 
-static void	set_ui_tile(t_game *game, t_sprite *sprite)
+static void	set_ui_tile(t_data_map *game, t_sprite *sprite)
 {
 	t_point	*ui_point;
 
@@ -45,7 +45,7 @@ static void	set_ui_tile(t_game *game, t_sprite *sprite)
 	set_tile(game, sprite, ui_point, PATH_SPRITE_UI);
 }
 
-void	set_map(t_game *g)
+void	set_map(t_data_map *g)
 {
 	t_point	*point;
 

@@ -6,13 +6,13 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:35:11 by max_dev           #+#    #+#             */
-/*   Updated: 2024/12/15 21:10:20 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/30 16:07:25 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	set_player(t_game *game)
+void	set_player(t_data_map *game)
 {
 	if (!game || !game->player || !game->player->sprite)
 		exit_error("Player or sprite not initialized");
@@ -25,7 +25,7 @@ void	set_player(t_game *game)
 	set_player_coordinates(game);
 }
 
-static void	colletible(t_game *game)
+static void	colletible(t_data_map *game)
 {
 	t_point	*point;
 
@@ -39,7 +39,7 @@ static void	colletible(t_game *game)
 	[game->player->position->x] = VOID);
 }
 
-void	set_move(t_game *game)
+void	set_move(t_data_map *game)
 {
 	char	*move;
 
@@ -51,7 +51,7 @@ void	set_move(t_game *game)
 	game->sprite_move->instances[0].z = Z_DEFAULT_UI +1;
 }
 
-void	move_player(t_game *game, int x, int y)
+void	move_player(t_data_map *game, int x, int y)
 {
 	if (game->map->map_data[game->player->position->y + y] \
 		[game->player->position->x + x] == WAll)
