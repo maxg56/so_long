@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 01:36:30 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/30 16:24:10 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/31 17:35:48 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "MLX42.h"
 # include "libft.h"
 # include <fcntl.h>
+#include <stdint.h>
 
 # include "list_int.h"
 # include "game_structs.h"
@@ -27,6 +28,13 @@
 # define Z_DEFAULT_PLAYER 5
 # define Z_DEFAULT_UI 10
 # define Z_DEFAULT_ENEMY 5
+
+#define WIDTH 1920
+#define HEIGHT 1080
+
+# define FRAME_ANIMATION  8  // temps de l'animation 
+# define WIDTH_TILES  130  // taille d'une tiles
+# define HEIGHT_TILES  130  // taille d'une tiles
 
 # define PATH_SPRITE_PLAYER "assets/player.png"
 # define PATH_SPRITE_WALL "assets/wall.png"
@@ -73,17 +81,16 @@ t_bool			open_and_check_map(t_data_map *game, char *path);
 
 t_sprite		*init_sprite(void);
 t_point			*init_point(void);
-t_window		*init_window(char *title, int width, int height);
-t_map			*init_map(void);
 t_player		*init_player(int x, int y);
-t_data_map			*init_game(void);
+t_data_map			*data_map(void);
 t_map_info		*init_map_info(void);
 t_flag			*init_flag(void);
-t_game		*init_init_game(void);
+t_game		*init_game(void);
 t_sprite_map	*init_sprite_map(void);
 
 //parse
 
+mlx_t			*get_mlx(void);
 void			parse_flag(int argc, char **argv, t_game *game);
 t_bool			open_and_check_map(t_data_map *game, char *path);
 t_bool			parse_input(int ac, char **av, t_data_map *game);
@@ -94,7 +101,7 @@ t_bool			check_path(t_data_map *game);
 mlx_image_t		*load_sprite_image(char *path, mlx_t *mlx);
 int				open_map(char *path);
 char			**mapcpy(char **map, int height);
-
+t_map			*init_map(void);
 void			set_instance_coordinates(mlx_image_t *sprite, int t, \
 t_point *point, int z);
 void			move_player(t_data_map *game, int x, int y);

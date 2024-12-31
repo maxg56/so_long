@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 19:19:14 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/30 16:24:10 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/31 16:54:59 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	exit_game( void *param)
 	t_game	*game ;
 
 	game = (t_game *)param;
-	mlx_close_window(game->window->mlx_instance);
-	mlx_terminate(game->window->mlx_instance);
+	mlx_close_window(get_mlx());
+	mlx_terminate(get_mlx());
 	ft_arna_free();
 	exit(0);
 }

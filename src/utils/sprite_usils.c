@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:35:03 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/30 16:07:25 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/31 16:54:59 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	load_sprite(t_data_map *game, t_sprite *s, char *path)
 
 	if (!s)
 		return ;
-	s->sprite = load_sprite_image(path, game->window->mlx_instance);
+	s->sprite = load_sprite_image(path, get_mlx());
 	id = add_int_list(&game->sprites_id, init_int_list());
 	s->id = id;
 }
@@ -64,7 +64,7 @@ void	set_tile(t_data_map *game, t_sprite *sprite, t_point *point, char *path)
 	if (sprite->id == -1)
 		load_sprite(game, sprite, path);
 	instance_index = get_int_list(&game->sprites_id, sprite->id);
-	mlx_image_to_window(game->window->mlx_instance, sprite->sprite,
+	mlx_image_to_window(get_mlx(), sprite->sprite,
 		point->x * TILE_SIZE, point->y * TILE_SIZE);
 	set_instance_z(sprite->sprite, instance_index->content, point->z);
 	instance_index->content++;

@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:35:11 by max_dev           #+#    #+#             */
-/*   Updated: 2024/12/30 16:07:25 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/31 16:54:59 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	set_player(t_data_map *game)
 	if (!game || !game->player || !game->player->sprite)
 		exit_error("Player or sprite not initialized");
 	game->player->sprite->sprite = load_sprite_image(PATH_SPRITE_PLAYER, \
-	game->window->mlx_instance);
+	get_mlx());
 	if (!game->player->sprite->sprite)
 		exit_error("Failed to load player sprite");
-	mlx_image_to_window(game->window->mlx_instance, \
+	mlx_image_to_window(get_mlx(), \
 	game->player->sprite->sprite, 0, 0);
 	set_player_coordinates(game);
 }
@@ -45,8 +45,8 @@ void	set_move(t_data_map *game)
 
 	move = ft_strjoin("move : ", ft_itoa(game->player->move_count));
 	if (game->sprite_move)
-		mlx_delete_image(game->window->mlx_instance, game->sprite_move);
-	game->sprite_move = mlx_put_string(game->window->mlx_instance, \
+		mlx_delete_image(get_mlx(), game->sprite_move);
+	game->sprite_move = mlx_put_string(get_mlx(), \
 	move, 25, 15);
 	game->sprite_move->instances[0].z = Z_DEFAULT_UI +1;
 }

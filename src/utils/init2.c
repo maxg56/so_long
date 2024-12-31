@@ -6,36 +6,22 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 02:06:11 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/30 16:24:10 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/31 17:09:18 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_window	*init_window(char *title, int width, int height)
-{
-	t_window	*window;
 
-	window = ft_arnalloc(sizeof(t_window));
-	if (!window)
-		return (NULL);
-	window->width = width;
-	window->height = height;
-	window->title = title;
-	window->mlx_instance = mlx_init(width, height, title, true);
-	if (!window->mlx_instance)
-		return (puts(mlx_strerror(mlx_errno)), NULL);
-	return (window);
-}
 
-t_data_map	*init_game(void)
+t_data_map	*init_data_map(void)
 {
 	t_data_map	*game;
 
 	game = ft_arnalloc(sizeof(t_data_map));
 	if (!game)
 		return (NULL);
-	game->window = ft_arnalloc(sizeof(t_window));
+	//game->window = ft_arnalloc(sizeof(t_window));
 	game->map = init_map();
 	if (!game->map)
 		exit_error("Map initialization failed");
@@ -68,7 +54,7 @@ t_flag	*init_flag(void)
 	return (flag);
 }
 
-t_game	*init_init_game(void)
+t_game	*init_game(void)
 {
 	t_game	*g;
 
@@ -79,7 +65,7 @@ t_game	*init_init_game(void)
 	g->paths = NULL;
 	g->game = NULL;
 	g->i_game = 0;
-	g->window = NULL;
+	//g->window = NULL;
 	g->game_satu = FALSE;
 	return (g);
 }

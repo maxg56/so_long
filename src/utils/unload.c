@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 21:56:23 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/30 16:07:25 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/31 16:54:59 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	uload_sprite(t_data_map *game, t_sprite *s)
 {
 	supr_id_int_list(&game->sprites_id, s->id);
 	if (s->sprite)
-		mlx_delete_image(game->window->mlx_instance, s->sprite);
+		mlx_delete_image(get_mlx(), s->sprite);
 }
 
 static void	uload_sprite_map(t_data_map *game, t_sprite_map *sm)
@@ -48,9 +48,9 @@ static void	uload_map(t_data_map *game)
 static void	uload_ui(t_data_map *game)
 {
 	if (game->sprite_move)
-		mlx_delete_image(game->window->mlx_instance, game->sprite_move);
+		mlx_delete_image(get_mlx(), game->sprite_move);
 	if (game->sprite_pv)
-		mlx_delete_image(game->window->mlx_instance, game->sprite_pv);
+		mlx_delete_image(get_mlx(), game->sprite_pv);
 }
 
 void	unload_add(t_data_map *game)

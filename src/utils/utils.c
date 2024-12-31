@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 02:37:42 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/30 16:07:25 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/31 16:51:31 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,13 @@ void	set_player_coordinates(t_data_map *game )
 	tmp = game->player->position->y * TILE_SIZE;
 	game->player->sprite->sprite->instances[0].y = tmp;
 	game->player->sprite->sprite->instances[0].z = Z_DEFAULT_PLAYER;
+}
+
+mlx_t	*get_mlx(void)
+{
+	static mlx_t*	mlx = NULL;
+
+	if (!mlx)
+		mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
+	return (mlx);
 }

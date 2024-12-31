@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:47:03 by max_dev           #+#    #+#             */
-/*   Updated: 2024/12/30 16:22:46 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/31 17:11:34 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,7 @@ typedef struct s_map_info
 	int		enemys;
 }	t_map_info;
 
-typedef struct s_window
-{
-	mlx_t	*mlx_instance;
-	int		width;
-	int		height;
-	char	*title;
-}	t_window;
+
 
 typedef struct s_tile_flags
 {
@@ -88,14 +82,16 @@ typedef struct	s_coord {
 	uint32_t width;
 	uint32_t height;
 }				t_coord;
+
+
 typedef struct	s_data_sprite {
-	mlx_texture_t *texture_png;
+	// mlx_texture_t *texture_png;
 	mlx_image_t* img;
 	uint32_t sprite_width;
 	uint32_t sprite_height;
 	uint32_t sheet_width;
 	uint32_t sheet_height;
-	u_int8_t nb_instances;
+	uint8_t nb_instances;
 	t_coord coord;
 	char main_cara;
 	char animate;
@@ -139,11 +135,11 @@ typedef struct s_flag
 typedef struct s_data_map
 {
 	int			fps;
-	t_window	*window;
+	//t_window	*window;
 	t_map		*map;
 	t_player	*player;
 	t_list_int	*sprites_id;
-	//t_bool		game_satu;
+	t_bool		game_satu;
 	t_enemy		**enemy;
 	mlx_image_t	*sprite_move;
 	mlx_image_t	*sprite_pv;
@@ -155,7 +151,6 @@ typedef struct s_game
 	int			i_game;
 	t_flag		*flag;
 	char		**paths;
-	t_window	*window;
 	t_bool		game_satu;
 }	t_game;
 
