@@ -7,3 +7,5 @@
 *.out
 *.exe
 so_long
+# copié par make depuis libe/MLX42
+include/MLX42.h
