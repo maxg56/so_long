@@ -6,8 +6,13 @@ bibliothèque graphique [MLX42](https://github.com/codam-coding-college/MLX42).
 Le joueur doit ramasser tous les objets de la carte puis rejoindre la sortie,
 en un minimum de déplacements. Le nombre de mouvements est affiché à l'écran.
 
-<!-- Capture d'écran : ajouter l'image dans assets/ puis décommenter la ligne ci-dessous -->
-<!-- ![Aperçu du jeu](assets/screenshot.png) -->
+<p align="center">
+  <img src="docs/gameplay.gif" alt="Partie complète sur maps/p1.ber" width="640">
+</p>
+
+<p align="center">
+  <img src="docs/big_map.gif" alt="Partie sur la grande carte maps/maps.ber" width="720">
+</p>
 
 ## Dépendances
 
