@@ -193,6 +193,9 @@ fclean: clean
 
 re: fclean all
 
+campagne: all
+	./$(NAME) -r $(sort $(wildcard maps/campagne/*.ber))
+
 norminette:
 	@norminette $(SRC_DIR) $(INC_DIR) | grep -Ev '^Notice|OK!$$'	\
 	&& bash -c 'echo -e "\033[1;31mNorminette KO!"'						\
