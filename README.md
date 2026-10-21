@@ -94,6 +94,10 @@ make campagne
 
 La campagne fournie compte 5 niveaux de difficulté croissante :
 
+<p align="center">
+  <img src="docs/campagne.gif" alt="Niveaux 1 et 2 de la campagne, avec l'écran de fin de niveau" width="800">
+</p>
+
 | Niveau | Carte                                  |
 |--------|----------------------------------------|
 | 1      | `maps/campagne/1_premiers_pas.ber`     |
