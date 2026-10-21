@@ -20,16 +20,11 @@ t_map	*init_map(void)
 	if (!map_struct)
 		return (NULL);
 	map_struct->map_data = NULL;
+	map_struct->map_orig = NULL;
 	map_struct->info = init_map_info();
 	map_struct->width = 0;
 	map_struct->height = 0;
-	map_struct->sprite_void = init_sprite_map();
-	map_struct->sprite_wall = init_sprite();
-	map_struct->sprite_exit = init_sprite();
-	map_struct->sprite_collect = init_sprite();
-	map_struct->sprite_wotre = init_sprite();
-	map_struct->sprite_ui = init_sprite();
-	map_struct->sprite_enemy = init_sprite();
+	map_struct->total_collect = 0;
 	return (map_struct);
 }
 
@@ -53,9 +48,10 @@ t_player	*init_player(int x, int y)
 	player = ft_arnalloc(sizeof(t_player));
 	if (!player)
 		return (NULL);
-	player->sprite = init_sprite();
+	ft_bzero(player, sizeof(t_player));
 	player->position = init_point();
-	player->move_count = 0;
+	if (!player->position)
+		return (NULL);
 	player->health_points = 3;
 	player->position->x = x;
 	player->position->y = y;

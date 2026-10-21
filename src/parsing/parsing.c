@@ -6,7 +6,7 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 02:36:24 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/15 21:11:30 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/30 16:07:25 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static char	*check_len_and_open(
 	return (close(fd_map), maps);
 }
 
-t_bool	open_and_check_map(t_game *game, char *path)
+t_bool	open_and_check_map(t_data_map *game, char *path)
 {
 	char	*maps;
 

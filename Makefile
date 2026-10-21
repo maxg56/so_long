@@ -61,21 +61,25 @@ TERM_CLEAR_LINE     =   \033[2K\r
 # **************************************************************************** #
 
 SRC_DIR         = src/
-MAP_DIR         =  $(SRC_DIR)map/
-UTILS_DIR       =  $(SRC_DIR)utils/
-PRSIG_DIR       =  $(SRC_DIR)parsing/
-SRC_FILES       =   main 
-SRC_MAP		 	=   check_map render_map choose_tase 
-SRC_UTILS		=   utils Erore init init2 usils_list_int \
-					sprite_usils unload player
-SRC_PRSIG	 	=   parsing parsing_utils parsimg_flag
+SRC_FILES       =   main
+SRC_CORE        =   window level level_flow hooks
+SRC_MAP         =   check_map
+SRC_ISO         =   iso pixel tile_floor tile_wall tile_exit
+SRC_RENDER      =   render_map camera
+SRC_ANIM        =   player_anim player_move props exit_anim
+SRC_UI          =   hud overlay state
+SRC_UTILS       =   utils Erore init init2
+SRC_PRSIG       =   parsing parsing_utils parsimg_flag
 
-
-
-SRC			    = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES))) \
-				  $(addprefix $(MAP_DIR), $(addsuffix .c, $(SRC_MAP))) \
-				  $(addprefix $(UTILS_DIR), $(addsuffix .c, $(SRC_UTILS))) \
-				  $(addprefix $(PRSIG_DIR), $(addsuffix .c, $(SRC_PRSIG)))
+SRC             = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES))) \
+                  $(addprefix $(SRC_DIR)core/, $(addsuffix .c, $(SRC_CORE))) \
+                  $(addprefix $(SRC_DIR)map/, $(addsuffix .c, $(SRC_MAP))) \
+                  $(addprefix $(SRC_DIR)iso/, $(addsuffix .c, $(SRC_ISO))) \
+                  $(addprefix $(SRC_DIR)render/, $(addsuffix .c, $(SRC_RENDER))) \
+                  $(addprefix $(SRC_DIR)anim/, $(addsuffix .c, $(SRC_ANIM))) \
+                  $(addprefix $(SRC_DIR)ui/, $(addsuffix .c, $(SRC_UI))) \
+                  $(addprefix $(SRC_DIR)utils/, $(addsuffix .c, $(SRC_UTILS))) \
+                  $(addprefix $(SRC_DIR)parsing/, $(addsuffix .c, $(SRC_PRSIG)))
 
 OBJ_DIR         = $(TMP)obj/
 OBJ             = $(patsubst %.c, $(OBJ_DIR)%.o, $(SRC))
@@ -188,6 +192,9 @@ fclean: clean
 	fi
 
 re: fclean all
+
+campagne: all
+	./$(NAME) -r $(sort $(wildcard maps/campagne/*.ber))
 
 norminette:
 	@norminette $(SRC_DIR) $(INC_DIR) | grep -Ev '^Notice|OK!$$'	\

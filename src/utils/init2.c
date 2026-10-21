@@ -6,50 +6,26 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 02:06:11 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/15 21:25:10 by mgendrot         ###   ########.fr       */
+/*   Updated: 2024/12/31 17:09:18 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_window	*init_window(char *title, int width, int height)
+t_data_map	*init_data_map(void)
 {
-	t_window	*window;
+	t_data_map	*game;
 
-	window = ft_arnalloc(sizeof(t_window));
-	if (!window)
-		return (NULL);
-	window->width = width;
-	window->height = height;
-	window->title = title;
-	window->mlx_instance = mlx_init(width, height, title, true);
-	if (!window->mlx_instance)
-		return (puts(mlx_strerror(mlx_errno)), NULL);
-	return (window);
-}
-
-t_game	*init_game(void)
-{
-	t_game	*game;
-
-	game = ft_arnalloc(sizeof(t_game));
+	game = ft_arnalloc(sizeof(t_data_map));
 	if (!game)
 		return (NULL);
-	game->window = ft_arnalloc(sizeof(t_window));
+	ft_bzero(game, sizeof(t_data_map));
 	game->map = init_map();
 	if (!game->map)
 		exit_error("Map initialization failed");
-	game->game_satu = TRUE;
 	game->player = init_player(0, 0);
 	if (!game->player)
-		return (NULL);
-	game->sprites_id = init_int_list();
-	if (!game->sprites_id)
-		return (NULL);
-	game->sprite_move = NULL;
-	game->sprite_pv = NULL;
-	game->fps = 30;
-	game->enemy = NULL;
+		exit_error("Player initialization failed");
 	return (game);
 }
 
@@ -68,18 +44,18 @@ t_flag	*init_flag(void)
 	return (flag);
 }
 
-t_init_game	*init_init_game(void)
+t_game	*init_game(void)
 {
-	t_init_game	*g;
+	t_game	*g;
 
-	g = ft_arnalloc(sizeof(t_init_game));
+	g = ft_arnalloc(sizeof(t_game));
 	if (!g)
 		return (NULL);
+	ft_bzero(g, sizeof(t_game));
 	g->flag = init_flag();
-	g->paths = NULL;
-	g->game = NULL;
-	g->i_game = 0;
-	g->window = NULL;
+	if (!g->flag)
+		return (NULL);
+	g->state = ST_PLAY;
 	g->game_satu = FALSE;
 	return (g);
 }
