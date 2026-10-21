@@ -6,81 +6,11 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 01:48:58 by mgendrot          #+#    #+#             */
-/*   Updated: 2024/12/31 17:31:13 by mgendrot         ###   ########.fr       */
+/*   Updated: 2026/10/21 10:00:00 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-static void	finch_game(t_game *game)
-{
-	game->game_satu = FALSE;
-	if (game->i_game == game->flag->ndmap - 1)
-		exit_game(game);
-	else
-		closed_game(game);
-}
-
-static void	ft_hook(void *game)
-{
-	t_data_map		*g;
-	t_game	*gi;
-
-	gi = (t_game *)game;
-	if (gi->game_satu)
-	{
-		g = gi->game[gi->i_game];
-		if (g->fps == 0)
-			g->fps = 30;
-		if (g->fps == 10)
-		{
-			if (g->game_satu == FALSE || g->player->health_points <= 0)
-				finch_game(gi);
-		}
-		g->fps--;
-	}
-	if (mlx_is_key_down(get_mlx(), MLX_KEY_ESCAPE))
-		exit_game(g);
-}
-
-static void	key_hook(mlx_key_data_t keydata, void *param)
-{
-	t_game	*ig;
-	t_data_map		*g;
-
-	ig = (t_game *)param;
-	if (ig->game_satu)
-		g = ig->game[ig->i_game];
-	if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT) && \
-		ig->game_satu)
-	{
-		if (mlx_is_key_down(get_mlx(), MLX_KEY_ESCAPE))
-			exit_game(ig);
-		if (mlx_is_key_down(get_mlx(), MLX_KEY_UP) || \
-			mlx_is_key_down(get_mlx(), MLX_KEY_W))
-			move_player(g, 0, -1);
-		if (mlx_is_key_down(get_mlx(), MLX_KEY_DOWN) || \
-			mlx_is_key_down(get_mlx(), MLX_KEY_S))
-			move_player(g, 0, 1);
-		if (mlx_is_key_down(get_mlx(), MLX_KEY_LEFT) || \
-			mlx_is_key_down(get_mlx(), MLX_KEY_A))
-			move_player(g, -1, 0);
-		if (mlx_is_key_down(get_mlx(), MLX_KEY_RIGHT) || \
-			mlx_is_key_down(get_mlx(), MLX_KEY_D))
-			move_player(g, 1, 0);
-	}
-}
-
-void	lood_game(t_game *ig)
-{
-	t_data_map		*game;
-
-	game = ig->game[ig->i_game];
-	set_player(game);
-	set_move(game);
-	set_map(game);
-	ig->game_satu = TRUE;
-}
 
 int	main(int argc, char **argv)
 {
@@ -97,10 +27,13 @@ int	main(int argc, char **argv)
 		if (!open_and_check_map(game->game[i], game->paths[i]))
 			return (EXIT_FAILURE);
 	}
-	get_mlx();
-	lood_game(game);
-	mlx_loop_hook(get_mlx(), ft_hook, game);
+	open_window(game);
+	load_assets(game);
+	load_level(game);
+	mlx_loop_hook(get_mlx(), loop_hook, game);
 	mlx_key_hook(get_mlx(), key_hook, game);
-	mlx_close_hook(get_mlx(), exit_game, game);
+	mlx_close_hook(get_mlx(), close_hook, game);
 	mlx_loop(get_mlx());
+	exit_game(game);
+	return (EXIT_SUCCESS);
 }

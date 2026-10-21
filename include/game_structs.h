@@ -6,14 +6,27 @@
 /*   By: mgendrot <mgendrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:47:03 by max_dev           #+#    #+#             */
-/*   Updated: 2024/12/31 17:11:34 by mgendrot         ###   ########.fr       */
+/*   Updated: 2026/10/21 10:00:00 by mgendrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_STRUCTS_H
 # define GAME_STRUCTS_H
 
-# include "so_long.h"
+# include "MLX42.h"
+# include "libft.h"
+# include "config.h"
+
+# define MAX_LVL_IMGS 16
+
+typedef enum e_state
+{
+	ST_PLAY,
+	ST_PAUSE,
+	ST_LEVEL_DONE,
+	ST_GAME_OVER,
+	ST_VICTORY,
+}	t_state;
 
 typedef struct s_point
 {
@@ -22,11 +35,13 @@ typedef struct s_point
 	int	z;
 }	t_point;
 
-typedef struct s_sprite
+typedef struct s_rect
 {
-	mlx_image_t	*sprite;
-	int			id;
-}	t_sprite;
+	int	x;
+	int	y;
+	int	w;
+	int	h;
+}	t_rect;
 
 typedef struct s_map_info
 {
@@ -36,92 +51,118 @@ typedef struct s_map_info
 	int		enemys;
 }	t_map_info;
 
-
-
-typedef struct s_tile_flags
-{
-	t_bool	w;
-	t_bool	e;
-	t_bool	n;
-	t_bool	s;
-}	t_tile_flags;
-
-typedef struct s_sprite_map
-{
-	t_sprite	*sprite;
-	t_sprite	*sprite_e;
-	t_sprite	*sprite_ew;
-	t_sprite	*sprite_w;
-	t_sprite	*sprite_n;
-	t_sprite	*sprite_ns;
-	t_sprite	*sprite_nw;
-	t_sprite	*sprite_ne;
-	t_sprite	*sprite_s;
-	t_sprite	*sprite_sw;
-	t_sprite	*sprite_se;
-}	t_sprite_map;
-
 typedef struct s_map
 {
-	char			**map_data;
-	int				width;
-	int				height;
-	t_sprite_map	*sprite_void;
-	t_sprite		*sprite_wall;
-	t_sprite		*sprite_exit;
-	t_sprite		*sprite_collect;
-	t_sprite		*sprite_wotre;
-	t_sprite		*sprite_ui;
-	t_sprite		*sprite_enemy;
-	t_map_info		*info;
+	char		**map_data;
+	char		**map_orig;
+	int			width;
+	int			height;
+	int			total_collect;
+	t_map_info	*info;
 }	t_map;
 
-typedef struct	s_coord {
-	uint32_t x;
-	uint32_t y;
-	uint32_t width;
-	uint32_t height;
-}				t_coord;
+/* animation image par image d'une feuille de sprites */
+typedef struct s_anim
+{
+	double	timer;
+	int		frame;
+	int		row;
+	t_bool	flip;
+	t_bool	dirty;
+}	t_anim;
 
-
-typedef struct	s_data_sprite {
-	// mlx_texture_t *texture_png;
-	mlx_image_t* img;
-	uint32_t sprite_width;
-	uint32_t sprite_height;
-	uint32_t sheet_width;
-	uint32_t sheet_height;
-	uint8_t nb_instances;
-	t_coord coord;
-	char main_cara;
-	char animate;
-	int stats;
-}				t_data_sprite;
-
-typedef struct	s_tab_sprite {
-	int nb_sprite;
-	int x_main;
-	int y_main;
-	//t_data_map *data_map;
-	t_data_sprite **tab_sprite;
-}				t_tab_sprite;
+/* interpolation d'une case a l'autre */
+typedef struct s_tween
+{
+	t_bool	active;
+	double	t;
+	int		dx;
+	int		dy;
+}	t_tween;
 
 typedef struct s_player
 {
 	t_point		*position;
+	t_point		spawn;
 	int			move_count;
 	int			health_points;
-	t_sprite	*sprite;
+	mlx_image_t	*img;
+	t_anim		anim;
+	t_tween		tw;
+	double		fx;
+	double		fy;
+	int			queued_x;
+	int			queued_y;
 }	t_player;
 
-typedef struct s_enemy
+/* objet ramassable anime (flottement puis "pop") */
+typedef struct s_prop
 {
-	int			nb;
-	t_point		*position;
-	int			move_count;
-	int			health_points;
-	t_sprite	*sprite;
-}	t_enemy;
+	int		x;
+	int		y;
+	int32_t	inst;
+	double	phase;
+	double	pop;
+	t_bool	taken;
+}	t_prop;
+
+typedef struct s_exit
+{
+	int			x;
+	int			y;
+	mlx_image_t	*closed;
+	mlx_image_t	*open[EXIT_FRAMES];
+	double		timer;
+	int			frame;
+	t_bool		is_open;
+}	t_exit;
+
+typedef struct s_hud
+{
+	mlx_image_t	*moves;
+	mlx_image_t	*items;
+	mlx_image_t	*level;
+}	t_hud;
+
+typedef struct s_data_map
+{
+	t_map		*map;
+	t_player	*player;
+	t_prop		*props;
+	int			nb_props;
+	t_exit		exit;
+	mlx_image_t	*collect_img;
+	mlx_image_t	*imgs[MAX_LVL_IMGS];
+	int			nb_imgs;
+	t_hud		hud;
+}	t_data_map;
+
+typedef struct s_assets
+{
+	mlx_texture_t	*sheet;
+	mlx_texture_t	*grass;
+	mlx_texture_t	*stone;
+	mlx_texture_t	*collect;
+}	t_assets;
+
+typedef struct s_overlay
+{
+	mlx_image_t	*dim;
+	mlx_image_t	*panel;
+	mlx_image_t	*lines[OV_LINES];
+	int			nb_lines;
+	double		fade;
+	t_bool		visible;
+}	t_overlay;
+
+typedef struct s_cam
+{
+	double	x;
+	double	y;
+	int		ox;
+	int		oy;
+	t_bool	ready;
+}	t_cam;
 
 typedef struct s_flag
 {
@@ -132,19 +173,6 @@ typedef struct s_flag
 	int			ndmap;
 }	t_flag;
 
-typedef struct s_data_map
-{
-	int			fps;
-	//t_window	*window;
-	t_map		*map;
-	t_player	*player;
-	t_list_int	*sprites_id;
-	t_bool		game_satu;
-	t_enemy		**enemy;
-	mlx_image_t	*sprite_move;
-	mlx_image_t	*sprite_pv;
-}	t_data_map;
-
 typedef struct s_game
 {
 	t_data_map	**game;
@@ -152,6 +180,13 @@ typedef struct s_game
 	t_flag		*flag;
 	char		**paths;
 	t_bool		game_satu;
+	t_state		state;
+	t_assets	assets;
+	t_overlay	ov;
+	t_cam		cam;
+	int			win_w;
+	int			win_h;
+	int			z_ui;
 }	t_game;
 
 #endif

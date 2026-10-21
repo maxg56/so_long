@@ -25,7 +25,6 @@ static t_bool	is_ber_file(const char *argv)
 	return (FALSE);
 }
 
-
 int	open_map(char *path)
 {
 	int	fd;

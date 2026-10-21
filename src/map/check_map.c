@@ -73,9 +73,9 @@ static t_bool	validate_map_structure(t_data_map *game)
 		}
 		y++;
 	}
-	if (!game->map->info->has_player || \
-		!game->map->info->has_exit || \
-		game->map->info->collectibles < 1)
+	if (!game->map->info->has_player
+		|| !game->map->info->has_exit
+		|| game->map->info->collectibles < 1)
 		return (FALSE);
 	return (TRUE);
 }
@@ -112,8 +112,13 @@ t_bool	check_path(t_data_map *game)
 	collexct = game->map->info->collectibles;
 	game->map->info = init_map_info();
 	flood_fill(game, game->player->position->x, game->player->position->y, map);
-	if (game->map->info->has_exit != TRUE || \
-		game->map->info->collectibles != collexct)
+	if (game->map->info->has_exit != TRUE
+		|| game->map->info->collectibles != collexct)
 		exit_error("[2]Invalid map (impossible to complete)");
+	game->map->total_collect = collexct;
+	game->map->map_orig = mapcpy(game->map->map_data, game->map->height);
+	if (!game->map->map_orig)
+		exit_error("Malloc failed");
+	game->player->spawn = *game->player->position;
 	return (TRUE);
 }

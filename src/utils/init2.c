@@ -12,8 +12,6 @@
 
 #include "so_long.h"
 
-
-
 t_data_map	*init_data_map(void)
 {
 	t_data_map	*game;
@@ -21,21 +19,13 @@ t_data_map	*init_data_map(void)
 	game = ft_arnalloc(sizeof(t_data_map));
 	if (!game)
 		return (NULL);
-	//game->window = ft_arnalloc(sizeof(t_window));
+	ft_bzero(game, sizeof(t_data_map));
 	game->map = init_map();
 	if (!game->map)
 		exit_error("Map initialization failed");
-	game->game_satu = TRUE;
 	game->player = init_player(0, 0);
 	if (!game->player)
-		return (NULL);
-	game->sprites_id = init_int_list();
-	if (!game->sprites_id)
-		return (NULL);
-	game->sprite_move = NULL;
-	game->sprite_pv = NULL;
-	game->fps = 30;
-	game->enemy = NULL;
+		exit_error("Player initialization failed");
 	return (game);
 }
 
@@ -61,11 +51,11 @@ t_game	*init_game(void)
 	g = ft_arnalloc(sizeof(t_game));
 	if (!g)
 		return (NULL);
+	ft_bzero(g, sizeof(t_game));
 	g->flag = init_flag();
-	g->paths = NULL;
-	g->game = NULL;
-	g->i_game = 0;
-	//g->window = NULL;
+	if (!g->flag)
+		return (NULL);
+	g->state = ST_PLAY;
 	g->game_satu = FALSE;
 	return (g);
 }
